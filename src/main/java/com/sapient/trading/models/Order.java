@@ -1,6 +1,6 @@
 package com.sapient.trading.models;
 
-import java.sql.Date;
+import org.springframework.stereotype.Component;
 
 public class Order {
 
