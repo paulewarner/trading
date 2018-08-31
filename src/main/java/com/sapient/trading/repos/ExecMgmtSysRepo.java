@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-//import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.PreparedStatement;
 import com.sapient.trading.models.Block;
 import com.sapient.trading.models.EquityResponse;
 import com.sapient.trading.models.Order;
@@ -54,16 +54,18 @@ public class ExecMgmtSysRepo {
 
 			// STEP 4: Execute a query
 			System.out.println("Creating statement...");
-			//PreparedStatement stmt = (PreparedStatement) conn.prepareStatement("SELECT password, idusers FROM courses.users where email = ?");
+			PreparedStatement stmt = (PreparedStatement) conn.prepareStatement("SELECT * from equity.order a");
 			//stmt.setString(1, email);
-			//String sql = "SELECT password, idusers FROM courses.users where email = '" + email + "'";
-			//System.out.println(sql);
-			//ResultSet rs = stmt.executeQuery();
+			//System.out.println(stmt);
+			ResultSet rs = stmt.executeQuery();
 
-//			rs.next();
-//			String tempPass = rs.getString("password");
-//			int tempID = rs.getInt("idusers");
-//			rs.close();
+			while(rs.next()) {
+				
+			}
+			rs.next();
+			String tempPass = rs.getString("password");
+			int tempID = rs.getInt("idusers");
+			rs.close();
 			
 			
 			System.out.println("Connection closed...");
