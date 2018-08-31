@@ -10,20 +10,20 @@ public class Order {
 	String type;
 	int totalQuantity;
 	String stockName;
-	int limitPrice;
-	int stopPrice;
+	float limitPrice;
+	float stopPrice;
 	String manager;
 	String porfolioId;
 	int openQuantity;
 	int allocatedQuantity;
 	String status;
-	int actualPrice;
+	float actualPrice;
 	Date timeCreated;
 	Date timeExecuted;
 	
 	
 	public Order(String orderId, String symbol, String side, String type, int totalQuantity, String stockName, String manager, String porfolioId, int allocatedQuantity,
-			int actualPrice, Date timeCreated,int limitPrice, int stopPrice) {
+			float actualPrice, Date timeCreated,float limitPrice, float stopPrice) {
 		super();
 		this.orderId = orderId;
 		this.symbol = symbol;
@@ -51,9 +51,9 @@ public class Order {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + actualPrice;
+		result = prime * result + Float.floatToIntBits(actualPrice);
 		result = prime * result + allocatedQuantity;
-		result = prime * result + limitPrice;
+		result = prime * result + Float.floatToIntBits(limitPrice);
 		result = prime * result + ((manager == null) ? 0 : manager.hashCode());
 		result = prime * result + openQuantity;
 		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
@@ -61,7 +61,7 @@ public class Order {
 		result = prime * result + ((side == null) ? 0 : side.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((stockName == null) ? 0 : stockName.hashCode());
-		result = prime * result + stopPrice;
+		result = prime * result + Float.floatToIntBits(stopPrice);
 		result = prime * result + ((symbol == null) ? 0 : symbol.hashCode());
 		result = prime * result + ((timeCreated == null) ? 0 : timeCreated.hashCode());
 		result = prime * result + ((timeExecuted == null) ? 0 : timeExecuted.hashCode());
@@ -69,6 +69,8 @@ public class Order {
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
+
+
 
 
 	@Override
@@ -83,13 +85,13 @@ public class Order {
 			return false;
 		}
 		Order other = (Order) obj;
-		if (actualPrice != other.actualPrice) {
+		if (Float.floatToIntBits(actualPrice) != Float.floatToIntBits(other.actualPrice)) {
 			return false;
 		}
 		if (allocatedQuantity != other.allocatedQuantity) {
 			return false;
 		}
-		if (limitPrice != other.limitPrice) {
+		if (Float.floatToIntBits(limitPrice) != Float.floatToIntBits(other.limitPrice)) {
 			return false;
 		}
 		if (manager == null) {
@@ -137,7 +139,7 @@ public class Order {
 		} else if (!stockName.equals(other.stockName)) {
 			return false;
 		}
-		if (stopPrice != other.stopPrice) {
+		if (Float.floatToIntBits(stopPrice) != Float.floatToIntBits(other.stopPrice)) {
 			return false;
 		}
 		if (symbol == null) {
@@ -174,6 +176,7 @@ public class Order {
 		return true;
 	}
 
+//	Getters and Setters
 
 	public String getOrderId() {
 		return orderId;
@@ -235,22 +238,22 @@ public class Order {
 	}
 
 
-	public int getLimitPrice() {
+	public float getLimitPrice() {
 		return limitPrice;
 	}
 
 
-	public void setLimitPrice(int limitPrice) {
+	public void setLimitPrice(float limitPrice) {
 		this.limitPrice = limitPrice;
 	}
 
 
-	public int getStopPrice() {
+	public float getStopPrice() {
 		return stopPrice;
 	}
 
 
-	public void setStopPrice(int stopPrice) {
+	public void setStopPrice(float stopPrice) {
 		this.stopPrice = stopPrice;
 	}
 
@@ -305,12 +308,12 @@ public class Order {
 	}
 
 
-	public int getActualPrice() {
+	public float getActualPrice() {
 		return actualPrice;
 	}
 
 
-	public void setActualPrice(int actualPrice) {
+	public void setActualPrice(float actualPrice) {
 		this.actualPrice = actualPrice;
 	}
 
