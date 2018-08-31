@@ -4,22 +4,22 @@ import java.sql.Date;
 
 public class Order {
 
-	String orderId;
-	String symbol;
-	String side;
-	String type;
-	int totalQuantity;
-	String stockName;
-	float limitPrice;
-	float stopPrice;
-	String manager;
-	String porfolioId;
-	int openQuantity;
-	int allocatedQuantity;
-	String status;
-	float actualPrice;
-	Date timeCreated;
-	Date timeExecuted;
+	private String orderId;
+	private String symbol;
+	private String side;
+	private String type;
+	private int totalQuantity;
+	private String stockName;
+	private float limitPrice;
+	private float stopPrice;
+	private String manager;
+	private String porfolioId;
+	private int openQuantity;
+	private int allocatedQuantity;
+	private String status;
+	private float actualPrice;
+	private Date timeCreated;
+	private Date timeExecuted;
 	
 	
 	public Order(String orderId, String symbol, String side, String type, int totalQuantity, String stockName, String manager, String porfolioId, int allocatedQuantity,

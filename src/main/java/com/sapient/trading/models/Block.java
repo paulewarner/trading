@@ -2,15 +2,15 @@ package com.sapient.trading.models;
 
 public class Block {
 	
-	String blockId;
-	String symbol;
-	String side;
-	String status;
-	float limitPrice;
-	float stopPrice;
-	int totalQuantity;
-	int openQuantity;
-	int executedQuantity;
+	private String blockId;
+	private String symbol;
+	private String side;
+	private String status;
+	private float limitPrice;
+	private float stopPrice;
+	private int totalQuantity;
+	private int openQuantity;
+	private int executedQuantity;
 	
 	public Block(String blockId, String symbol, String side, String status,
 			int totalQuantity, float limitPrice, float stopPrice) {
