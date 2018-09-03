@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import com.sapient.trading.helper.ConnectionManager;
 import com.sapient.trading.models.Authority;
 import com.sapient.trading.models.EncryptedPass;
 import com.sapient.trading.models.User;
@@ -22,19 +23,12 @@ import com.sapient.trading.models.User;
 @Component
 public class UserRepository  {
 	
-	public static void main(String[] args) {
-	}
+	
 
 	private User retrievedUser = null;
 	private Authority retrievedUserAuthority = null;
-	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-
-	static final String DB_URL = "jdbc:mysql://localhost:3307/cogdb";
-	
-	// Database credentials
-	static final String USER = "root";
-	static final String PASS = "root";
-
+	static Connection currentConn = null;
+	static ResultSet rs = null;
 	
 	public User getUser() {
 		return retrievedUser;
@@ -44,19 +38,13 @@ public class UserRepository  {
 	}
 	public int findAllUsers(String enteredUserId,String enteredPassword) {
 		
-		Connection conn = null;
 		Statement stmt = null;
 		List<User> users = new ArrayList<User>();
 		List<Authority> userAuthorities = new ArrayList<Authority>();
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			System.out.println("Connecting to a selected database...");
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-			System.out.println("Connected database successfully...");
-			//Execute a query
-			System.out.println("Creating statement...");
-			stmt = conn.createStatement();
+			currentConn = ConnectionManager.getConnection();
+			stmt = currentConn.createStatement();
 			
 			
 			String sqlUserData =  "SELECT userId, username, password, enabled FROM users";
@@ -112,22 +100,17 @@ public class UserRepository  {
 	public void addUser(String userId,String username,String password,String authority){
 		
 		password = new EncryptedPass().hashPassword(password);
-		Connection conn = null;
+		
 		//Statement stmt = null;
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			System.out.println("Connecting to a selected database...");
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-			System.out.println("Connected database successfully...");
-
-
-			System.out.println("Creating statement...");
-			//stmt = conn.createStatement();
+			currentConn = ConnectionManager.getConnection();
+			
+			
 			
 		    String sqlUserData = " insert into users (userId, username, password, enabled)"
 		    	        + " values (?, ?, ?, ?)";		    
-		    PreparedStatement preparedStmt = conn.prepareStatement(sqlUserData);
+		    PreparedStatement preparedStmt = currentConn.prepareStatement(sqlUserData);
 		    preparedStmt.setString (1, userId);
 		    preparedStmt.setString (2, username);
 		    preparedStmt.setString (3, password);
@@ -136,11 +119,11 @@ public class UserRepository  {
 		    
 		    String sqlAuthorityStatement = " insert into authorities (userId, authority)"
 	    	        + " values (?, ?)";	
-		    preparedStmt = conn.prepareStatement(sqlAuthorityStatement);
+		    preparedStmt = currentConn.prepareStatement(sqlAuthorityStatement);
 		    preparedStmt.setString (1, userId);
 		    preparedStmt.setString (2, authority);
 		    preparedStmt.execute();		    
-		    conn.close();	
+		    currentConn.close();	
 		
 		} catch (SQLException se) {
 			// Handle errors for JDBC
