@@ -13,17 +13,17 @@ public class Order {
 	private float limitPrice;
 	private float stopPrice;
 	private String manager;
-	private String porfolioId;
+	private String portfolioID;
 	private int openQuantity;
 	private int allocatedQuantity;
 	private String status;
-	private float actualPrice;
+	private float currentPrice;
 	private Date timeCreated;
 	private Date timeExecuted;
 	
 	
-	public Order(String orderId, String symbol, String side, String type, int totalQuantity, String stockName, String manager, String porfolioId, int allocatedQuantity,
-			float actualPrice, Date timeCreated,float limitPrice, float stopPrice) {
+	public Order(String orderId, String symbol, String side, String type, int totalQuantity, String stockName, String manager, String portfolioID, int allocatedQuantity,
+			float currentPrice, Date timeCreated,float limitPrice, float stopPrice) {
 		super();
 		this.orderId = orderId;
 		this.symbol = symbol;
@@ -33,11 +33,11 @@ public class Order {
 		this.stockName = stockName;
 		
 		this.manager = manager;
-		this.porfolioId = porfolioId;
+		this.portfolioID = portfolioID;
 		this.openQuantity = totalQuantity;				//While creation full order is open
 		this.allocatedQuantity = allocatedQuantity;		
 		this.status = "Pending";						//Will be pending while creation
-		this.actualPrice = actualPrice;
+		this.currentPrice = currentPrice;
 		this.timeCreated = timeCreated;
 		this.timeExecuted = null;						//Will be assigned when order is completed
 		
@@ -51,13 +51,13 @@ public class Order {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + Float.floatToIntBits(actualPrice);
+		result = prime * result + Float.floatToIntBits(currentPrice);
 		result = prime * result + allocatedQuantity;
 		result = prime * result + Float.floatToIntBits(limitPrice);
 		result = prime * result + ((manager == null) ? 0 : manager.hashCode());
 		result = prime * result + openQuantity;
 		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
-		result = prime * result + ((porfolioId == null) ? 0 : porfolioId.hashCode());
+		result = prime * result + ((portfolioID == null) ? 0 : portfolioID.hashCode());
 		result = prime * result + ((side == null) ? 0 : side.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((stockName == null) ? 0 : stockName.hashCode());
@@ -85,7 +85,7 @@ public class Order {
 			return false;
 		}
 		Order other = (Order) obj;
-		if (Float.floatToIntBits(actualPrice) != Float.floatToIntBits(other.actualPrice)) {
+		if (Float.floatToIntBits(currentPrice) != Float.floatToIntBits(other.currentPrice)) {
 			return false;
 		}
 		if (allocatedQuantity != other.allocatedQuantity) {
@@ -111,11 +111,11 @@ public class Order {
 		} else if (!orderId.equals(other.orderId)) {
 			return false;
 		}
-		if (porfolioId == null) {
-			if (other.porfolioId != null) {
+		if (portfolioID == null) {
+			if (other.portfolioID != null) {
 				return false;
 			}
-		} else if (!porfolioId.equals(other.porfolioId)) {
+		} else if (!portfolioID.equals(other.portfolioID)) {
 			return false;
 		}
 		if (side == null) {
@@ -268,13 +268,13 @@ public class Order {
 	}
 
 
-	public String getPorfolioId() {
-		return porfolioId;
+	public String getportfolioID() {
+		return portfolioID;
 	}
 
 
-	public void setPorfolioId(String porfolioId) {
-		this.porfolioId = porfolioId;
+	public void setportfolioID(String portfolioID) {
+		this.portfolioID = portfolioID;
 	}
 
 
@@ -308,13 +308,13 @@ public class Order {
 	}
 
 
-	public float getActualPrice() {
-		return actualPrice;
+	public float getcurrentPrice() {
+		return currentPrice;
 	}
 
 
-	public void setActualPrice(float actualPrice) {
-		this.actualPrice = actualPrice;
+	public void setcurrentPrice(float currentPrice) {
+		this.currentPrice = currentPrice;
 	}
 
 
@@ -342,9 +342,9 @@ public class Order {
 	public String toString() {
 		return "Order [orderId=" + orderId + ", symbol=" + symbol + ", side=" + side + ", type=" + type
 				+ ", totalQuantity=" + totalQuantity + ", stockName=" + stockName + ", limitPrice=" + limitPrice
-				+ ", stopPrice=" + stopPrice + ", manager=" + manager + ", porfolioId=" + porfolioId + ", openQuantity="
-				+ openQuantity + ", allocatedQuantity=" + allocatedQuantity + ", status=" + status + ", actualPrice="
-				+ actualPrice + ", timeCreated=" + timeCreated + ", timeExecuted=" + timeExecuted + "]";
+				+ ", stopPrice=" + stopPrice + ", manager=" + manager + ", portfolioID=" + portfolioID + ", openQuantity="
+				+ openQuantity + ", allocatedQuantity=" + allocatedQuantity + ", status=" + status + ", currentPrice="
+				+ currentPrice + ", timeCreated=" + timeCreated + ", timeExecuted=" + timeExecuted + "]";
 	}
 		
 	
