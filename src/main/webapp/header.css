@@ -1,0 +1,18 @@
+@charset "ISO-8859-1";
+
+#bodyitems > li {
+	display: none;
+}
+
+#bodyitems li:first-child {
+	display: block;
+}
+
+.titlebar {
+	background-color: rgb(50,54,69);
+	color: rgb(255, 255, 255);
+}
+
+.titlebar-content {
+	margin-left: 2em;
+}
