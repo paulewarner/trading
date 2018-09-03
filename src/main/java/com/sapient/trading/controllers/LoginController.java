@@ -1,5 +1,4 @@
 package com.sapient.trading.controllers;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +24,7 @@ public class LoginController {
 	
 	@RequestMapping(path="/login",method=RequestMethod.GET)
 	public String loginPage(Model model){
-		return "testLogin";
+		return "login";
 	}
 	
 	@RequestMapping(path="/logout", method=RequestMethod.GET)
@@ -50,16 +49,16 @@ public class LoginController {
 			return "testPortfolio";
 		}
 		else if(valid == 2){
-			String message ="Password Incorrect!";
+			String message ="User name and password mismatch!";
 			model.addAttribute("message",message);
-			return "testLogin";
+			return "login";
 		}
 
 		else{
 			System.out.println("login again");
-			String message ="User not found!!";
+			String message ="User name and password mismatch!";
 			model.addAttribute("message",message);
-			return "testLogin";
+			return "login";
 			}		
 	}
 	
@@ -78,8 +77,10 @@ public class LoginController {
 		new UserRepository().addUser(userId,username,password,authority);
 		
 		
-		return "testLogin";
+		return "login";
 	}
+	
+	
 	
 
 }
