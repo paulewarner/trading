@@ -23,13 +23,8 @@ import com.sapient.trading.models.User;
 public class UserRepository  {
 	
 	public static void main(String[] args) {
-/*		List<User> courses = new UserRepository().findAllUsers();
-		System.out.println(courses);*/
 	}
-	
-// / JDBC driver name and database URL
-//	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-//	static final String DB_URL = "jdbc:mysql://localhost:3307/cogdb";
+
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 
 	static final String DB_URL = "jdbc:mysql://localhost:3307/cogdb";
