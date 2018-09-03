@@ -6,6 +6,9 @@
 		<br />
 		<h2>Welcome, ${name}!</h2>
 	</jsp:attribute>
+	<jsp:attribute name="leftnavitem">
+		<button type="button" class="btn header-button">Logout</button>
+	</jsp:attribute>
 	<jsp:body>
 		<ul class="container" id="bodyitems">
 			<li>This is the home page!</li>

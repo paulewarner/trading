@@ -1,6 +1,7 @@
 <%@ tag language="java" pageEncoding="ISO-8859-1"%>
 <%@attribute name="body" fragment="true" %>
 <%@attribute name="header" fragment="true" %>
+<%@attribute name="leftnavitem" fragment="true" %>
 <html>
 	<head>
 		<link rel="stylesheet" href="./header.css" />
@@ -15,18 +16,20 @@
 				<jsp:invoke fragment="header" />
 			</div>
 		</div>
-	
-		<ul id="navitems" class="nav nav-tabs">
-		  <li class="nav-item nav-link active">
-		    Home
-		  </li>
-		  <li class="nav-item nav-link">
-		    Create Order
-		  </li>
-		  <li class="nav-item nav-link">
-		    Search
-		  </li>
-		</ul>
+		<div class="nav">
+			<ul id="navitems" class="nav nav-tabs">
+				<li class="nav-item nav-link active">
+		    		Home
+				</li>
+				<li class="nav-item nav-link">
+				    Create Order
+				</li>
+				<li class="nav-item nav-link">
+				    Search
+				</li>
+			</ul>
+			<span class="left-navitem"><jsp:invoke fragment="leftnavitem" /></span>
+		</div>
 		<jsp:doBody />
 		<footer>This is a footer</footer>
 	<script src="./header.js" ></script>
