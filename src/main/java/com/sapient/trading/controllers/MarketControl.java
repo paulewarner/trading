@@ -108,7 +108,7 @@ public class MarketControl {
 			return "invalid";
 		}
 		model.addAttribute("company", repo.detailedInfo(comp));
-		return "detailedinfo";
+		return "SearchPageResultsDetails";
 	}
 	
 }

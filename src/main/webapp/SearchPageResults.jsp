@@ -7,7 +7,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+<script>
+    function submit(id, string){
+        document.getElementById("tick").value = string;
+        document.getElementById("form").submit();
+    }
+</script>
 <style>
 html, body {
 	height: 100%;
@@ -51,8 +56,8 @@ html, body {
 				<div class="input-group">
 					<form class="form-inline" action="find" method="GET">
 						<div class="form-group">
-							<select name="dropdown" class="form-control" id="exampleFormControlSelect1"
-								style="background-color: #AFBAC7">
+							<select name="dropdown" class="form-control"
+								id="exampleFormControlSelect1" style="background-color: #AFBAC7">
 								<option value="ticker">Ticker</option>
 								<option value="company">Company</option>
 							</select>
@@ -82,18 +87,26 @@ html, body {
 								<th>% Change</th>
 							</tr>
 						</thead>
-						<% 	List<Company> results = (List<Company>) request.getAttribute("companies");
-                                    for(Company c : results) { 
-                                    	request.setAttribute("company", c);
-                                    %>
-						<tr>
-							<td></td>
-							<td>${company.getName()} (${company.getTick()})</td>
-							<td>${company.getPrice()}</td>
-							<td>${company.getPriceChange()}</td>
-							<td>${company.getPercentChange()}</td>
-						</tr>
-						<% } %>
+						<form id="form" action="seeMore" method="GET">
+							<input type="hidden" id="tick" name="ticker">
+							<% 	List<Company> results = (List<Company>) request.getAttribute("companies");
+                                int i = 1;
+                                        for(Company c : results) { 
+                                            request.setAttribute("company", c);
+                                            request.setAttribute("row_num", i);
+                                            i++;
+                                        %>
+							<tr id="${row_num}" onclick="submit('${row_num}', '${company.getTick()}')">
+								<td></td>
+								<td>${company.getName()}(${company.getTick()})</td>
+								<td>${company.getPrice()}</td>
+								<td>${company.getPriceChange()}</td>
+								<td>${company.getPercentChange()}</td>
+
+							</tr>
+
+							<% } %>
+						</form>
 					</table>
 				</div>
 			</div>
