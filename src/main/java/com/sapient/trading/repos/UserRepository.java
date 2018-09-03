@@ -25,14 +25,23 @@ public class UserRepository  {
 	public static void main(String[] args) {
 	}
 
+	private User retrievedUser = null;
+	private Authority retrievedUserAuthority = null;
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 
 	static final String DB_URL = "jdbc:mysql://localhost:3307/cogdb";
-
+	
 	// Database credentials
 	static final String USER = "root";
 	static final String PASS = "root";
 
+	
+	public User getUser() {
+		return retrievedUser;
+	}
+	public Authority getAuthority() {
+		return retrievedUserAuthority;
+	}
 	public int findAllUsers(String enteredUserId,String enteredPassword) {
 		
 		Connection conn = null;
@@ -65,7 +74,7 @@ public class UserRepository  {
 				int enabled = rs.getInt("enabled");
 				
 				
-				User retrievedUser = new User(userId, username, password,enabled);
+				retrievedUser = new User(userId, username, password,enabled);
 				users.add(retrievedUser );
 				
 				if  (userId.equals(enteredUserId)){
@@ -83,7 +92,7 @@ public class UserRepository  {
 				// Retrieve by column name
 				String userId = rs.getString("userId");
 				String authority = rs.getString("authority");
-				Authority retrievedUserAuthority = new Authority(userId, authority);
+				retrievedUserAuthority = new Authority(userId, authority);
 				userAuthorities.add(retrievedUserAuthority);
 			}
 			rs.close();
@@ -144,6 +153,8 @@ public class UserRepository  {
 		
 		
 	}
+	
+	
 
 	
 

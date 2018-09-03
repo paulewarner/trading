@@ -7,12 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.sapient.trading.models.Authority;
+import com.sapient.trading.models.User;
 import com.sapient.trading.repos.UserRepository;
+import com.sapient.trading.repos.UserSession;
 
 
 
 @Controller
 public class LoginController {
+	
+	@Autowired
+	UserSession session;
 
 	@Autowired
 	UserRepository repo;
@@ -22,12 +28,24 @@ public class LoginController {
 		return "testLogin";
 	}
 	
+	@RequestMapping(path="/logout", method=RequestMethod.GET)
+	public String logout(Model model) {
+		session.setAuthorities(null);
+		session.setUser(null);
+		return "redirect:/login";
+	}
+	
 	@RequestMapping(path="/portfolioX",method=RequestMethod.POST)
 	public String portfolioPage(Model model ,@RequestParam("userId") String userId,@RequestParam("password") String password){		
 		System.out.println("Controller code invoked..");
 		// fetch courses from db.. repo
-		int valid = new UserRepository().findAllUsers(userId,password);
+		UserRepository repository = new UserRepository();
+		int valid = repository.findAllUsers(userId,password);
 		if(valid==1){
+			User loggedInUser = repository.getUser();
+			Authority loggedInAuthority = repository.getAuthority();
+			session.setUser(loggedInUser);
+			session.setAuthorities(loggedInAuthority);
 			System.out.println("login success");
 			return "testPortfolio";
 		}
