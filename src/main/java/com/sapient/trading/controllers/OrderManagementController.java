@@ -25,13 +25,13 @@ public class OrderManagementController {
 	boolean res = false;
 	String orderid;
 	String blockid;
-	List<Order> listOfOrders;
+	List<Order> listOfOerders;
 	
 	@RequestMapping(path="/createOrder",method=RequestMethod.GET)
 	public String receive(Model model) {
 		model.addAttribute("isOrdersPage", false);
 		model.addAttribute("activeTab", 1);
-		return "createOrder";
+		return "CreateOrder";
 	}
 	@RequestMapping(path="/createOrder",method=RequestMethod.POST)
 	public boolean createOrder(Model model, 
@@ -49,7 +49,7 @@ public class OrderManagementController {
 		timeCreated = new Date(System.currentTimeMillis());
 		blockid = blockID+"";
 		OrderCreationRepo ocr = new OrderCreationRepo();
-		listOfOrders = new ArrayList<>();
+		ArrayList<Order> listOfOrders = new ArrayList<>();
 		if(totalQuantity>10000) {
 			
 			int num= totalQuantity/10000;
