@@ -30,6 +30,7 @@ public class MarketControl {
 	
 	/** cd holds the data of all the company names listed on IEX. */
 	CompData cd = new CompData();
+	List<String> compNames = new ArrayList<String>();
 	
 	/***********************Initialization Block******************************/
 
@@ -38,6 +39,7 @@ public class MarketControl {
 	final List<ExchangeSymbol> exchangeSymbolList = iexTradingClient.
 			executeRequest(new SymbolsRequestBuilder().build());
 	cd.addData(exchangeSymbolList);
+	compNames = cd.allCompNames(exchangeSymbolList);
 	}
 	
 	/**********************************Methods********************************/
@@ -80,8 +82,8 @@ public class MarketControl {
 			System.out.println("hello");
 			return "invalid";
 		}
-		System.out.println(compList.size());
 		model.addAttribute("companies", compList);
+		model.addAttribute("companyNames", compNames);
 		return "SearchPageResults";
 	}
 
@@ -99,16 +101,46 @@ public class MarketControl {
 	 * @return string for the JSP file
 	 */
 	@RequestMapping(path="/seeMore", method=RequestMethod.GET)
-	public String details(Model model,  @RequestParam("ticker") String tick){
+	public String details(Model model,  @RequestParam("ticker") String tick,
+			@RequestParam("dropdown") String drop){
 		Company comp = null;
+		List<String> comps = new ArrayList<String>();
 		try {
-			comp = repo.findCompTick(tick);
+			if(drop.equals("ticker")) {
+				comp = repo.findCompTick(tick);
+			
+			}else {
+				comps = cd.findTickers(tick).stream().
+						map(c -> cd.findTicker(c)).
+						collect(Collectors.toList());
+				comp = comps.stream().map(c -> repo.findCompTick(c)).
+						collect(Collectors.toList()).get(0);
+			}
 		}catch(IEXTradingException e ) {
 			System.out.println("hello");
 			return "invalid";
 		}
 		model.addAttribute("company", repo.detailedInfo(comp));
+		model.addAttribute("companyNames", compNames);
 		return "SearchPageResultsDetails";
 	}
 	
+	
+	/**
+	 * Adds list of company names an goes to the search page.
+	 * 
+	 * @param model
+	 * 		  Holds information to be used in the JSP files.
+	 * 
+	 * @param name
+	 * 		  partial or full name/ticker of the company to search
+	 * 
+	 * @return string for the JSP file
+	 */
+	@RequestMapping(path="/start", method=RequestMethod.GET)
+	public String search(Model model) {
+		model.addAttribute("companies", compNames);
+		return "SearchPage";
+	}
+
 }

@@ -8,10 +8,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <script>
-    function submit(id, string){
-        document.getElementById("tick").value = string;
-        document.getElementById("form").submit();
-    }
+	function submit(id, string) {
+		document.getElementById("tick").value = string;
+		document.getElementById("form").submit();
+	}
+
+	function myFunction() {
+		// Declare variables
+		var input, filter, ul, li, a, i;
+		input = document.getElementById('myInput');
+		filter = input.value.toUpperCase();
+		ul = document.getElementById("myUL");
+		li = ul.getElementsByTagName('li');
+
+		// Loop through all list items, and hide those who don't match the search query
+		for (i = 0; i < li.length; i++) {
+			a = li[i].getElementsByTagName("a")[0];
+			if (filter.length == 0) {
+				li[i].style.display = "none";
+			} else if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+				li[i].style.display = "block";
+			} else {
+				li[i].style.display = "none";
+			}
+		}
+	}
+	function submitform(row, name) {
+		document.getElementById("comp").value = name;
+		document.getElementById("myForm").submit();
+	}
 </script>
 <style>
 html, body {
@@ -39,6 +64,59 @@ html, body {
 .results-list tr:hover {
 	background-color: #DAE2EB;
 }
+
+#myUL li {
+	display: none;
+}
+
+#myInput {
+	font-size: 16px; /* Increase font-size */
+	border: 1px solid #ddd; /* Add a grey border */
+}
+
+#myUL {
+	/* Remove default list styling */
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+#myUL li a {
+	border: 1px solid #ddd; /* Add a border to all links */
+	margin-top: -1px; /* Prevent double borders */
+	background-color: #f6f6f6; /* Grey background color */
+	padding: 12px; /* Add some padding */
+	text-decoration: none; /* Remove default text underline */
+	font-size: 18px; /* Increase the font-size */
+	color: black; /* Add a black text color */
+	display: block;
+	/* Make it into a block element to fill the whole list */
+	width: 75%; /* Full-width */
+	margin-left: auto;
+	margin-right: auto;
+}
+#myUL
+ 
+li
+ 
+a
+:hover
+:not
+ 
+(
+.header
+ 
+)
+{
+background-color
+:
+ 
+#eee
+;
+/* Add a hover effect to all links, except for headers */
+
+
+}
 </style>
 
 <link rel="stylesheet"
@@ -63,8 +141,10 @@ html, body {
 							</select>
 						</div>
 
-						<input type="text" class="form-control" name="ticker"
-							placeholder="" style="color: rgb(112, 119, 129)"> <span
+						<input type="text" id="myInput"
+							placeholder="Search for companies..." onkeyup="myFunction()"
+							class="form-control" name="ticker"
+							style="color: rgb(112, 119, 129)"> <span
 							class="input-group-btn">
 							<button type="submit" class="btn btn-light">Search</button>
 						</span>
@@ -73,6 +153,27 @@ html, body {
 			</div>
 		</div>
 	</div>
+	<form id="myForm" action="seeMore" method="GET">
+		<input type="hidden" name="ticker" id="comp"></input> <input
+			type="hidden" name="dropdown" value="company"></input>
+		<ul id="myUL">
+			<%
+				List<String> comps = (List<String>) request.getAttribute("companyNames");
+				int i = 1;
+				for (String c : comps) {
+					request.setAttribute("c", c);
+					request.setAttribute("row", i);
+					i++;
+			%>
+
+			<li id="${row}" onclick="submitform('${row}', '${c}')"><a>${c}</a></li>
+
+			<%
+				}
+			%>
+
+		</ul>
+	</form>
 	<div class="results">
 		<div class="row">
 			<div class="col-xs-8 col-xs-offset-2">
@@ -88,15 +189,18 @@ html, body {
 							</tr>
 						</thead>
 						<form id="form" action="seeMore" method="GET">
-							<input type="hidden" id="tick" name="ticker">
-							<% 	List<Company> results = (List<Company>) request.getAttribute("companies");
-                                int i = 1;
-                                        for(Company c : results) { 
-                                            request.setAttribute("company", c);
-                                            request.setAttribute("row_num", i);
-                                            i++;
-                                        %>
-							<tr id="${row_num}" onclick="submit('${row_num}', '${company.getTick()}')">
+							<input type="hidden" id="tick" name="ticker"> <input
+								type="hidden" name="dropdown" value="ticker"></input>
+							<%
+								List<Company> results = (List<Company>) request.getAttribute("companies");
+								int j = 1;
+								for (Company c : results) {
+									request.setAttribute("company", c);
+									request.setAttribute("row_num", j);
+									j++;
+							%>
+							<tr id="${row_num}"
+								onclick="submit('${row_num}', '${company.getTick()}')">
 								<td></td>
 								<td>${company.getName()}(${company.getTick()})</td>
 								<td>${company.getPrice()}</td>
@@ -105,7 +209,9 @@ html, body {
 
 							</tr>
 
-							<% } %>
+							<%
+								}
+							%>
 						</form>
 					</table>
 				</div>

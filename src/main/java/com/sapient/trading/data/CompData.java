@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import pl.zankowski.iextrading4j.api.exception.IEXTradingException;
 import pl.zankowski.iextrading4j.api.refdata.ExchangeSymbol;
 
+
 public class CompData {
 	/** tickers holds the mapping of a company's name to it's ticker. */
 	Map<String, String> tickers;
@@ -41,6 +42,18 @@ public class CompData {
 	public void addData(List<ExchangeSymbol> esList) {
 		esList.stream().forEach(es -> this.add(es));
 		
+	}
+
+	/********************************************************************************
+	 * takes in list of exchangesymbol info and returns a list of just company names
+	 * used for live search 
+	 * @param esList
+	 * @return list of company names
+	 * 
+	 * */
+	public List<String> allCompNames(List<ExchangeSymbol> esList){
+		List<String> allComps = esList.stream().map(p->p.getName()).collect(Collectors.toList());
+		return allComps;
 	}
 	
 	
