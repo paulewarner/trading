@@ -54,8 +54,10 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
 }
 </style>
+<%@ include file="commonheader.jsp" %>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 <div class="box">
         <div class="inner_box">
             <div class="row">
@@ -154,4 +156,5 @@ result.value = myResult;
 
 }
 </script>
+<%@ include file="scripts.jsp" %>
 </html>
