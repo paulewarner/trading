@@ -37,6 +37,6 @@
 		</div>
 		<jsp:doBody />
 		<footer>This is a footer</footer>
-	<script src="./header.js" ></script>
+	<script src="/trading/header.js" ></script>
 	</body>
 </html>
