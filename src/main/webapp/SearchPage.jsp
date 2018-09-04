@@ -173,6 +173,8 @@ background-color
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 		crossorigin="anonymous"></script>
-
+	<script>
+		document.getElementById('navitems').children[2].classList.add("active");
+	</script>
 </body>
 </html>

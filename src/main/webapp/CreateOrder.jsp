@@ -147,6 +147,8 @@ input[type=number]::-webkit-outer-spin-button {
 var d = new Date();
 document.getElementById("demo").innerHTML+= d;
 
+document.getElementById('navitems').children[1].classList.add("active");
+
 function calculate(){
 var quant = document.getElementById('quantity').value; 
 var prc = document.getElementById('price').value;
@@ -156,5 +158,4 @@ result.value = myResult;
 
 }
 </script>
-<%@ include file="scripts.jsp" %>
 </html>
