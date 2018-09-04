@@ -123,7 +123,7 @@
                     <p>Status:</p>
               </div>
               <div class="buyORsellContainer">
-                    <a href="#" class="button">Buy/Sell</a>
+                    <a href="/trading/mvc/createOrder" class="button">Buy/Sell</a>
               </div>
              </div>
               <div class="popWindowContainer" id="popWindowContainerForwarded">

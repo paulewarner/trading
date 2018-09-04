@@ -62,7 +62,7 @@ input[type=number]::-webkit-outer-spin-button {
         <div class="inner_box">
             <div class="row">
                 <div class="col-sm-9">
-                    <h2 id="stckName"><b>${name}</b></h2>
+                    <h2 id="stckName"><b>${cname}</b></h2>
                     <h4 id="smbl">${ticker}</h4>
                     <p><b>Price: ${price}</b></p>
                     <p id="demo">Date: </p>
