@@ -1,15 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<% Boolean isOrdersPage = (Boolean)request.getAttribute("isOrdersPage"); %> 
+    pageEncoding="ISO-8859-1"%> 
 <div class="titlebar">
 	<div class="titlebar-content">
- 		<% if (isOrdersPage) { %>
-			<p>Orders page</p>
-		<% } else { %>
-				<h4>Trader Profile</h4>
-				<br />
-				<h2>Hello, ${name}</h2>
-		<% } %>
+		<div id="titlebarInfo">
+			<h4>${profileType} Profile</h4>
+			<br />
+			<h2>Hello, ${name}!</h2>
+		</div>
+		<div id="titlebarPortfolioInfo">
+			<h4>Client Name: <span id="clientName"></span></h4>
+			<h4>Portfolio Manager: <span id="portfolioManager"></span></h4>
+			<h4>Trader: <span id="traders"></span></h4>
+		</div>
 	</div>
 	</div>
 		<div class="nav">
