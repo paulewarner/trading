@@ -37,6 +37,14 @@ public class UserRepository  {
 		return retrievedUserAuthority;
 	}
 	public int findAllUsers(String enteredUserId,String enteredPassword) {
+		int enteredHashPassword = 7;
+	
+		for (int i = 0; i < enteredPassword.length(); i++) {
+			enteredHashPassword = enteredHashPassword*31 + enteredPassword.charAt(i);
+		}
+		
+		
+		System.out.println("entered pass hashed " + Integer.toString(enteredHashPassword));
 		
 		Statement stmt = null;
 		List<User> users = new ArrayList<User>();
@@ -47,8 +55,8 @@ public class UserRepository  {
 			stmt = currentConn.createStatement();
 			
 			
-			String sqlUserData =  "SELECT userId, username, password, enabled FROM users";
-			String sqlAuthorityData = "SELECT userId, authority FROM authorities";
+			String sqlUserData =  "SELECT * FROM user";
+			String sqlAuthorityData = "SELECT UserID, UserType FROM authorities";
 			
 			ResultSet rs = stmt.executeQuery(sqlUserData);
 			
@@ -59,15 +67,17 @@ public class UserRepository  {
 				String userId = rs.getString("userId");
 				String username = rs.getString("username");
 				String password = rs.getString("password");
-				int enabled = rs.getInt("enabled");
+				//int enabled = rs.getInt("enabled");
 				
 				
-				retrievedUser = new User(userId, username, password,enabled);
+				retrievedUser = new User(userId, username, password);
 				users.add(retrievedUser );
 				
+								
 				if  (userId.equals(enteredUserId)){
 					userPresence = true;
-					if( new EncryptedPass().checkPass(enteredPassword, password))
+					if(Integer.toString(enteredHashPassword).equals(password))
+					//if( new EncryptedPass().checkPass(enteredPassword, password))
 						return 1;
 					else 
 						return 2;

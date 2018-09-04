@@ -46,7 +46,7 @@ public class LoginController {
 			session.setUser(loggedInUser);
 			session.setAuthorities(loggedInAuthority);
 			System.out.println("login success");
-			return "testPortfolio";
+			return "redirect:/portfolio";
 		}
 		else if(valid == 2){
 			String message ="User name and password mismatch!";

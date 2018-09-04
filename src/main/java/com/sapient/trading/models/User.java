@@ -4,14 +4,14 @@ public class User {
 	String userId;
 	String username;
 	String password;
-	int enabled;
+	//int enabled;
 
-	public User(String userId, String username, String password, int enabled) {
+	public User(String userId, String username, String password) {
 		super();
 		this.userId = userId;
 		this.username = username;
 		this.password = password;
-		this.enabled = enabled;
+		//this.enabled = enabled;
 	}
 	
 	public String getUserId() {
@@ -29,12 +29,12 @@ public class User {
 	public String getPassword() {
 		return password;
 	}
-	public int getEnabled() {
-		return enabled;
-	}
-	public void setEnabled(int enabled) {
-		this.enabled = enabled;
-	}
+//	public int getEnabled() {
+//		return enabled;
+//	}
+//	public void setEnabled(int enabled) {
+//		this.enabled = enabled;
+//	}
 	public void setPassword(String password) {
 		this.password = password;
 	}

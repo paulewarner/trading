@@ -12,9 +12,9 @@ public class ConnectionManager {
 	{
 		try
 		{
-			String url = "jdbc:mysql://localhost:3306/equity";
+			String url = "jdbc:mysql://localhost:3307/equity";
 			String uname = "root";
-			String pwd = "Sapient123";
+			String pwd = "root";
 
 			Class.forName("com.mysql.jdbc.Driver");
 			try
