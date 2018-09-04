@@ -27,9 +27,9 @@ public class ExecutionManagementController {
 	ExecMgmtSysRepo EMSRepo;
 	
 	@RequestMapping(path="/forwardOrder", method= RequestMethod.POST)
-	public String handleForwardedOrders(@RequestParam("order") String orderID){
+	public String handleForwardedOrders(Model model, @RequestParam("order") String orderID){
 		List<Order> li = new ArrayList<Order>();
-		
+		Boolean result = false;
 //		Retrieving order
 		Order tmp = EMSRepo.retrieveOrder( orderID );
 		li.add(tmp);
@@ -42,10 +42,17 @@ public class ExecutionManagementController {
 		
 //		Updating database
 		for(Order o : li) {
-			EMSRepo.orderUpdate(o);
+			result = EMSRepo.orderUpdate(o);
 		}
 		
-		return "res";
+		System.out.println(result);
+		if(result) {
+			model.addAttribute("response", "successfully added");
+		} else {
+			model.addAttribute("response", "failed to add");
+		}
+		
+		return "TestResponseEMS";
 	}
 	
 	@RequestMapping(path="/forwardBlock", method= RequestMethod.POST)

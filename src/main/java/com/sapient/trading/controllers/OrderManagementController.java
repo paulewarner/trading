@@ -34,15 +34,14 @@ public class OrderManagementController {
 	UserSession session;
 	
 	@RequestMapping(path="/createOrder",method=RequestMethod.GET)
-
 	public String receive(Model model, @RequestParam("company")String companyName, @RequestParam("price")String companyPrice, @RequestParam("ticker")String companyTicker) {
 		model.addAttribute("cname", companyName);
 		model.addAttribute("price", companyPrice);
 		model.addAttribute("ticker", companyTicker);
 		model.addAttribute("isOrdersPage", false);
 		model.addAttribute("activeTab", 1);
-		model.addAttribute("profileType", session.getAuthorities().getAccountType());
-		model.addAttribute("name", session.getUser().getUsername());
+		//model.addAttribute("profileType", session.getAuthorities().getAccountType());
+		//model.addAttribute("name", session.getUser().getUsername());
 
 		return "CreateOrder";
 	}
@@ -50,6 +49,8 @@ public class OrderManagementController {
 	public boolean createOrder(Model model, 
 			@RequestParam("portfolioID")String portfolioID,
 			//@RequestParam("company")Company company,
+			@RequestParam("ticker")String ticker,
+			@RequestParam("compName")String compName,
 			@RequestParam("Buy/Sell")String side,
 			@RequestParam("type")String type,
 			@RequestParam("totalQuantity")int totalQuantity,
@@ -72,13 +73,13 @@ public class OrderManagementController {
 			for(int i =0;i<num;i++) {
 				orderid= orderID+"";
 				if(i==num-1) {
-					order = new Order(orderid, "APPL", side, type, residue, "Apple", 
+					order = new Order(orderid, ticker, side, type, residue, compName, 
 							manager, portfolioID, allocatedQuantity, currentPrice, timeCreated, limitPrice, stopPrice);
 					res = ocr.saveOrder(order);
 					listOfOrders.add(order);
 					orderID++;
 				}else {
-					order = new Order(orderid, "APPL", side, type, 10000, "Apple", 
+					order = new Order(orderid, ticker, side, type, 10000, compName, 
 							manager, portfolioID, allocatedQuantity, currentPrice, timeCreated, limitPrice, stopPrice);
 					res = ocr.saveOrder(order);
 					listOfOrders.add(order);
@@ -87,7 +88,7 @@ public class OrderManagementController {
 			}
 		}else {
 			orderid= orderID+"";
-			order = new Order(orderid, "APPL", side, type, totalQuantity, "Apple", 
+			order = new Order(orderid, ticker, side, type, totalQuantity, compName, 
 					manager, portfolioID, allocatedQuantity, currentPrice, timeCreated, limitPrice, stopPrice);
 			res = ocr.saveOrder(order);
 			listOfOrders.add(order);
