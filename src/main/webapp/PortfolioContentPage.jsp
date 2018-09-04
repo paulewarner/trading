@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<%@include file="commonheader.jsp" %>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -97,6 +98,7 @@
 </head>
        
 <body>
+	<%@ include file="header.jsp" %>
         <h1>Orders</h1>
     <div class="ordersContainer">
     <%List<PortfolioContent> portfolioContents= (List<PortfolioContent>)request.getAttribute("portfoliocontents");%>
@@ -174,5 +176,7 @@
         document.getElementById("popWindowContainerUnForwarded").style.display= "flex";
         document.getElementById("popWindowContainerForwarded").style.display= "none";
     }
+    
+    document.getElementById('navitems').children[0].classList.add('active');
 </script>
 </html>

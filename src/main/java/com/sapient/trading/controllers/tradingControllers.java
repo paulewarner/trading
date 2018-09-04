@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sapient.trading.repos.HomePageRepo;
 import com.sapient.trading.repos.PortfolioContentRepo;
+import com.sapient.trading.repos.UserSession;
 import com.sapient.trading.models.Portfolio1;
 import com.sapient.trading.models.PortfolioContent;
 
@@ -23,10 +24,9 @@ public class tradingControllers {
 	HomePageRepo homerepo;
 	@Autowired
 	PortfolioContentRepo contentrepo;
-	@RequestMapping(path="/login", method=RequestMethod.GET)
-	public String loginpage(Model model){
-		return "login";		
-	}
+	@Autowired
+	UserSession session;
+
 	@RequestMapping(path="/Homepage", method=RequestMethod.GET)
 	public String loginpage(Model model,@RequestParam("user_id") String userid){
 		HashSet<Portfolio1> portfolio1s = new HashSet<Portfolio1>();
@@ -34,11 +34,15 @@ public class tradingControllers {
 		portfolio1s=homerepo.getlistofportfolios(userid);
 		System.out.println(portfolio1s);
 		model.addAttribute("portfolios",portfolio1s);
+		model.addAttribute("name", session.getUser().getUsername());
+		model.addAttribute("portfolioType", session.getAuthorities().getAccountType());
 		return "Homepage";		
 	}
 	@RequestMapping(path="/profile", method=RequestMethod.GET)
 	public String fetchCourses(Model model,@RequestParam("pId") String id){
 
+		model.addAttribute("name", session.getUser().getUsername());
+		model.addAttribute("portfolioType", session.getAuthorities().getAccountType());
 		List<PortfolioContent> portfoliocontents = new ArrayList<PortfolioContent>();
 		portfoliocontents= (List<PortfolioContent>) contentrepo.getlistoforders(id);
 		System.out.println(portfoliocontents);
