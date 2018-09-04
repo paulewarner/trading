@@ -35,13 +35,10 @@ public class OrderManagementController {
 	
 	@RequestMapping(path="/createOrder",method=RequestMethod.GET)
 	public String receive(Model model) {
-<<<<<<< Upstream, based on origin/dev
 		model.addAttribute("isOrdersPage", false);
 		model.addAttribute("activeTab", 1);
-=======
 		model.addAttribute("profileType", session.getAuthorities().getAccountType());
 		model.addAttribute("name", session.getUser().getUsername());
->>>>>>> 66a7ddf Implement small fixes on OrderManagementController.
 		return "CreateOrder";
 	}
 	@RequestMapping(path="/createOrder",method=RequestMethod.POST)
