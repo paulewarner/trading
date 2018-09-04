@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -155,8 +157,9 @@
                        <p>Total Equity:$253,330</p>
                  </div>
                  <div class="buyORsellContainer">
-                     <form action="trading/mvc/forwardOrder" method="POST">
-                         <button class="button" type="submit" value="order">Forward Order</button>
+                 
+                     <form action="mvc/forwardOrder" method="POST">
+                         <button class="button" type="submit" name="order" value="">Forward Order</button>
                      </form>
                        <!-- <a href="#" class="button">Forward Order</a> -->
                   </div>

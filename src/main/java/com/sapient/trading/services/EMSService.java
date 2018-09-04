@@ -98,7 +98,7 @@ public class EMSService {
 			}
 		}
 		order.setAllocatedQuantity(totalAllocated);
-		order.setActualPrice(actualPrice);
+		//order.setActualPrice(actualPrice);
 		order.setTimeExecuted(date);
 		order.setOpenQuantity(order.getTotalQuantity() - totalAllocated);
 		
