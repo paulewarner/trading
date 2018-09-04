@@ -76,6 +76,7 @@ background-color
 
 }
 </style>
+<%@ include file="commonheader.jsp" %>
 
 <script>
 	function myFunction() {
@@ -112,7 +113,7 @@ background-color
 </head>
 <body style="background-color: #e5e9f2">
 
-
+	<%@ include file="header.jsp" %>
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-8 col-xs-offset-2">
