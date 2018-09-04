@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<t:layout>
+<t:layout tabText="Home">
 	<jsp:attribute name="headerFiles">
 		<link rel="stylesheet" type="text/css" href="/trading/style.css" />
 	</jsp:attribute>
@@ -10,7 +10,7 @@
 		<h2>Welcome, ${name}!</h2>
 	</jsp:attribute>
 	<jsp:attribute name="leftnavitem">
-		<button type="button" class="btn header-button">Logout</button>
+		<button class="btn header-button">Home</button>
 	</jsp:attribute>
 	<jsp:body>
 		<ul class="container" id="bodyitems">

@@ -3,6 +3,7 @@
 <%@attribute name="header" fragment="true" %>
 <%@attribute name="leftnavitem" fragment="true" %>
 <%@attribute name="headerFiles" fragment="true" %>
+<%@attribute name="tabText" required="true" %>
 <html>
 	<head>
 		<jsp:invoke fragment="headerFiles" />
@@ -20,9 +21,10 @@
 			</div>
 		</div>
 		<div class="nav">
+			<jsp:invoke fragment="leftnavitem" />
 			<ul id="navitems" class="nav nav-tabs">
-				<li class="nav-item nav-link active">
-		    		Home
+				<li id="firstTab" class="nav-item nav-link active">
+					${tabText}
 				</li>
 				<li class="nav-item nav-link">
 				    Create Order
@@ -31,7 +33,7 @@
 				    Search
 				</li>
 			</ul>
-			<span class="left-navitem"><jsp:invoke fragment="leftnavitem" /></span>
+			<span class="left-navitem"><button type="button" class="btn header-button">Logout</button></span>
 		</div>
 		<jsp:doBody />
 		<footer>This is a footer</footer>
