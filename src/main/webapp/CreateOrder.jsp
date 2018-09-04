@@ -5,6 +5,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<script>
+
+	function change(currentprice){
+		console.log(currentprice);
+		var pricevalue = document.getElementById('price');
+		var pricetype=document.getElementById('priceType').value;
+		if(pricetype==0){
+			pricevalue.value=currentprice;
+			pricevalue.disabled=true;
+		}else{
+			pricevalue.value="";
+			pricevalue.disabled=false;
+		}
+	}
+
+
+</script>
 <style>
 .box{
     background-color: rgb(50, 54, 69);
@@ -84,7 +101,10 @@ input[type=number]::-webkit-outer-spin-button {
             <div id="dash"></div>
             
             <div>
-                <form action="">
+                <form action="createOrder" method="POST">
+                <input type="hidden" name="ticker" value="${ticker}">
+                <input type="hidden" name="compName" value="${cname}">
+                <input type="hidden" name="currentPrice" value="${price}">
                     <div class="row">
                         <div class="col-sm-2">
                                 <label for="quantity">Quantity</label><br>
@@ -97,11 +117,11 @@ input[type=number]::-webkit-outer-spin-button {
 
                         <div class="col-sm-4">
                             <label for="price">Price</label><br>
-                            <select name="priceType" id="">
+                            <select name="priceType" id="priceType" onchange="change('${price}')">
                                 <option value="0">Current Price</option>
                                 <option value="1">Limit Price</option>
                             </select>
-                            <input type="number" name="price" id="price" step="any" min="0" oninput="calculate()" required>
+                            <input type="number" name="price" id="price" step="any" min="0" value="${price}" disabled=true oninput="calculate()" required>
                         </div>
 
                         <div class="col-sm-1">
