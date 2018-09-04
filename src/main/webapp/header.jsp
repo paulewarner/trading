@@ -23,7 +23,7 @@
 				<a href="/trading/mvc/CreateOrder">Create Order</a>
 			</li>
 			<li class="nav-item nav-link">
-			    <a href="/trading/mvc/Search">Search</a>
+			    <a href="/trading/mvc/start">Search</a>
 			</li>
 		</ul>
 <span class="left-navitem"><button type="button" class="btn header-button">Logout</button></span>
