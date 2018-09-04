@@ -1,6 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:layout>
+	<jsp:attribute name="headerFiles">
+		<link rel="stylesheet" type="text/css" href="/trading/style.css" />
+	</jsp:attribute>
 	<jsp:attribute name="header">
 		<h4>${profileType} Profile</h4>
 		<br />
