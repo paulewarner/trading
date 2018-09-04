@@ -95,27 +95,8 @@ html, body {
 	margin-left: auto;
 	margin-right: auto;
 }
-#myUL
- 
-li
- 
-a
-:hover
-:not
- 
-(
-.header
- 
-)
-{
-background-color
-:
- 
-#eee
-;
-/* Add a hover effect to all links, except for headers */
-
-
+#myUL li a:hover:not(.header){
+background-color:#eee;/* Add a hover effect to all links, except for headers */
 }
 </style>
 
@@ -123,11 +104,11 @@ background-color
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-
+<%@ include file="commonheader.jsp" %>
 </head>
 <body style="background-color: #e5e9f2">
 
-
+	<%@ include file="header.jsp" %>
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-8 col-xs-offset-2">

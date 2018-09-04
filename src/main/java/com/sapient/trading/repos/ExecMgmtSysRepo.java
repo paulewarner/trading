@@ -68,6 +68,7 @@ public boolean orderUpdate(Order newOrder) {
 		stmt.executeUpdate();
 			
 		System.out.println("Connection closed...");
+		res = true;
 
 	} 
 		catch (SQLException se) {
