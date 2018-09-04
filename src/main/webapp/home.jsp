@@ -1,22 +1,17 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<t:layout tabText="Home">
-	<jsp:attribute name="headerFiles">
-		<link rel="stylesheet" type="text/css" href="/trading/style.css" />
-	</jsp:attribute>
-	<jsp:attribute name="header">
-		<h4>${profileType} Profile</h4>
-		<br />
-		<h2>Welcome, ${name}!</h2>
-	</jsp:attribute>
-	<jsp:attribute name="leftnavitem">
-		<button class="btn header-button">Home</button>
-	</jsp:attribute>
-	<jsp:body>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+	<head>
+		<%@ include file="commonheader.jsp" %>
+	</head>
+	<body>
+		<%@ include file="header.jsp" %>
 		<ul class="container" id="bodyitems">
-			<li>This is the home page!</li>
+					<li>This is the home page</li>
 			<li>This is the create order page</li>
 			<li>This is the search page</li>
 		</ul>
-	</jsp:body>
-</t:layout>
+		<%@ include file="scripts.jsp" %>
+	</body>
+</html>
