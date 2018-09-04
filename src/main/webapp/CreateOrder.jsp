@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <style>
 .box{
     background-color: rgb(50, 54, 69);
@@ -62,9 +63,9 @@ input[type=number]::-webkit-outer-spin-button {
         <div class="inner_box">
             <div class="row">
                 <div class="col-sm-9">
-                    <h2 id="stckName"><b>APPLE</b></h2>
-                    <h4 id="smbl">(NASDAQ:AAPL)</h4>
-                    <p><b>From API</b></p>
+                    <h2 id="stckName"><b>${cname}</b></h2>
+                    <h4 id="smbl">${ticker}</h4>
+                    <p><b>Price: ${price}</b></p>
                     <p id="demo">Date: </p>
                 </div>
                 

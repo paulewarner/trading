@@ -4,6 +4,8 @@ package com.sapient.trading.controllers;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,7 @@ import com.sapient.trading.models.BlockForOrderManagement;
 import com.sapient.trading.models.Order;
 import com.sapient.trading.repos.BlockCreationRepo;
 import com.sapient.trading.repos.OrderCreationRepo;
+import com.sapient.trading.repos.UserSession;
 
 @Controller
 public class OrderManagementController {
@@ -27,10 +30,20 @@ public class OrderManagementController {
 	String blockid;
 	List<Order> listOfOerders;
 	
+	@Autowired
+	UserSession session;
+	
 	@RequestMapping(path="/createOrder",method=RequestMethod.GET)
-	public String receive(Model model) {
+
+	public String receive(Model model, @RequestParam("company")String companyName, @RequestParam("price")String companyPrice, @RequestParam("ticker")String companyTicker) {
+		model.addAttribute("cname", companyName);
+		model.addAttribute("price", companyPrice);
+		model.addAttribute("ticker", companyTicker);
 		model.addAttribute("isOrdersPage", false);
 		model.addAttribute("activeTab", 1);
+		model.addAttribute("profileType", session.getAuthorities().getAccountType());
+		model.addAttribute("name", session.getUser().getUsername());
+
 		return "CreateOrder";
 	}
 	@RequestMapping(path="/createOrder",method=RequestMethod.POST)

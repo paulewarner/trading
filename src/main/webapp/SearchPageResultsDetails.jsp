@@ -234,7 +234,12 @@ background-color:#eee;/* Add a hover effect to all links, except for headers */
                                 document.getElementById("datetime").innerHTML = (("0"+dt.getDate()).slice(-2)) +"/"+ (("0"+(dt.getMonth()+1)).slice(-2)) +"/"+ (dt.getFullYear()) +" "+ (("0"+dt.getHours()).slice(-2)) +":"+ (("0"+dt.getMinutes()).slice(-2));
                             </script>
 					</div>
-					<div class="create-order-button">Create Order</div>
+					<div class="create-order-button"><form  action="createOrder" method="GET">
+						<input type="hidden" name="company" value="${company.getName()}" ></input>
+						<input type="hidden" name="price" value="${company.getPrice()}"></input>
+						<input type="hidden" name="ticker" value="${company.getTick()}"></input>
+						<input type="submit" value="Create Order">
+					</form></div>
 				</div>
 			</div>
 		</div>
