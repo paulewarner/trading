@@ -4,8 +4,8 @@ public class Block {
 	
 	private String blockId;
 	private String symbol;
-	private String side;
-	private String status;
+	private String side;		// In database its '0' for Buy and '1' for Sell
+	private String status;		// In database its '0' for Pending and '1' for Completed
 	private float limitPrice;
 	private float stopPrice;
 	private int totalQuantity;
