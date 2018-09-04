@@ -1,0 +1,28 @@
+@charset "ISO-8859-1";
+
+#bodyitems > li {
+	display: none;
+}
+
+#bodyitems li:first-child {
+	display: block;
+}
+
+#navitems {
+	margin-right: auto !important;
+}
+
+.titlebar {
+	background-color: rgb(50,54,69);
+	color: rgb(255, 255, 255);
+}
+
+.titlebar-content {
+	margin-left: 2em;
+}
+
+.header-button {
+	color: rgb(255, 255, 255);
+	background-color: rgb(131, 144, 163);
+	margin-right: 0.5em;
+}
