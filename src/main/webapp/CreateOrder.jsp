@@ -95,10 +95,13 @@ input[type=number]::-webkit-outer-spin-button {
                     <p>
                         Portfolio ID
                     </p> 
-                    <select name="Portfolio_ID">
-                        <option value="201">1</option>
-                        <option value="202">2</option>
-                        <option value="203">3</option>
+                    <select name="portfolioID" id="portfolioid">
+                    	<% String[] portfolioArray = (String[])request.getAttribute("portfolioArray"); %>
+                   		<% for (int i = 0; i < portfolioArray.length; i++) { %>
+                   			<option value="<%= portfolioArray[i] %>">
+                   				<%= portfolioArray[i] %>
+                   			</option>
+                   		<% } %>
                     </select> 
                 </div>
             </div>
@@ -114,7 +117,7 @@ input[type=number]::-webkit-outer-spin-button {
                     <div class="row">
                         <div class="col-sm-2">
                                 <label for="quantity">Quantity</label><br>
-                                <input type="number" name="quantity" id="quantity" placeholder="Quantity" min="0" oninput="calculate()" required>
+                                <input type="number" name="totalQuantity" id="quantity" placeholder="Quantity" min="0" oninput="calculate()" required>
                         </div>
                         <div class="col-sm-1">
                             <br>
@@ -127,7 +130,7 @@ input[type=number]::-webkit-outer-spin-button {
                                 <option value="0">Current Price</option>
                                 <option value="1">Limit Price</option>
                             </select>
-                            <input type="number" name="price" id="price" step="any" min="0" value="${price}" disabled=true oninput="calculate()" required>
+                            <input type="number" name="limitPrice" id="price" step="any" min="0" value="${price}" disabled=true oninput="calculate()" required>
                         </div>
 
                         <div class="col-sm-1">
@@ -143,13 +146,13 @@ input[type=number]::-webkit-outer-spin-button {
 
                     <div class="row">
                         <div class="col-sm-2">
-                            <label for="target">Target</label><br>
-                            <input type="number" name="target" id="" placeholder="Target">
+                            <label for="type">Type</label><br>
+                            <input type="number" name="type" id="" placeholder="type">
                         </div>
 
                         <div class="col-sm-2">
                             <label for="stop">Stop Loss</label><br>
-                            <input type="number" name="stop" id="" placeholder="Stop Loss">
+                            <input type="number" name="stopPrice" id="" placeholder="Stop Loss">
                         </div>
 
                         <div class="col-sm-1"></div>
@@ -164,6 +167,8 @@ input[type=number]::-webkit-outer-spin-button {
                         </div>
                     </div>
                     </div>
+                    
+                    <input name="Buy/Sell" style="display: none" type="number" value="0" />
                 </form>
             
         </div>

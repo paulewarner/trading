@@ -9,8 +9,16 @@ public class PortfolioContent {
 	String limitprice;
 	String stopprice;
 	String date;
-	String allocated;
-	String open;
+	int allocated;
+	int open;
+	String orderID;
+	
+	public String getOrderID() {
+		return orderID;
+	}
+	public void setOrderID(String orderID) {
+		this.orderID = orderID;
+	}
 	public String getSymbol() {
 		return symbol;
 	}
@@ -59,16 +67,16 @@ public class PortfolioContent {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public String getAllocated() {
+	public int getAllocated() {
 		return allocated;
 	}
-	public void setAllocated(String allocated) {
+	public void setAllocated(int allocated) {
 		this.allocated = allocated;
 	}
-	public String getOpen() {
+	public int getOpen() {
 		return open;
 	}
-	public void setOpen(String open) {
+	public void setOpen(int open) {
 		this.open = open;
 	}
 	@Override
@@ -78,7 +86,7 @@ public class PortfolioContent {
 				+ ", date=" + date + ", allocated=" + allocated + ", open=" + open + "]";
 	}
 	public PortfolioContent(String symbol, int quantity, int value, int status, String stockname, String limitprice,
-			String stopprice, String date, String allocated, String open) {
+			String stopprice, String date, int allocated, int open) {
 		super();
 		this.symbol = symbol;
 		this.quantity = quantity;
@@ -95,10 +103,10 @@ public class PortfolioContent {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((allocated == null) ? 0 : allocated.hashCode());
+		result = prime * result + allocated;
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((limitprice == null) ? 0 : limitprice.hashCode());
-		result = prime * result + ((open == null) ? 0 : open.hashCode());
+		result = prime * result + open;
 		result = prime * result + quantity;
 		result = prime * result + status;
 		result = prime * result + ((stockname == null) ? 0 : stockname.hashCode());
@@ -109,56 +117,66 @@ public class PortfolioContent {
 	}
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (!(obj instanceof PortfolioContent)) {
 			return false;
+		}
 		PortfolioContent other = (PortfolioContent) obj;
-		if (allocated == null) {
-			if (other.allocated != null)
-				return false;
-		} else if (!allocated.equals(other.allocated))
+		if (allocated != other.allocated) {
 			return false;
+		}
 		if (date == null) {
-			if (other.date != null)
+			if (other.date != null) {
 				return false;
-		} else if (!date.equals(other.date))
+			}
+		} else if (!date.equals(other.date)) {
 			return false;
+		}
 		if (limitprice == null) {
-			if (other.limitprice != null)
+			if (other.limitprice != null) {
 				return false;
-		} else if (!limitprice.equals(other.limitprice))
+			}
+		} else if (!limitprice.equals(other.limitprice)) {
 			return false;
-		if (open == null) {
-			if (other.open != null)
-				return false;
-		} else if (!open.equals(other.open))
+		}
+		if (open != other.open) {
 			return false;
-		if (quantity != other.quantity)
+		}
+		if (quantity != other.quantity) {
 			return false;
-		if (status != other.status)
+		}
+		if (status != other.status) {
 			return false;
+		}
 		if (stockname == null) {
-			if (other.stockname != null)
+			if (other.stockname != null) {
 				return false;
-		} else if (!stockname.equals(other.stockname))
+			}
+		} else if (!stockname.equals(other.stockname)) {
 			return false;
+		}
 		if (stopprice == null) {
-			if (other.stopprice != null)
+			if (other.stopprice != null) {
 				return false;
-		} else if (!stopprice.equals(other.stopprice))
+			}
+		} else if (!stopprice.equals(other.stopprice)) {
 			return false;
+		}
 		if (symbol == null) {
-			if (other.symbol != null)
+			if (other.symbol != null) {
 				return false;
-		} else if (!symbol.equals(other.symbol))
+			}
+		} else if (!symbol.equals(other.symbol)) {
 			return false;
-		if (value != other.value)
+		}
+		if (value != other.value) {
 			return false;
+		}
 		return true;
 	}
-	
-	
 }

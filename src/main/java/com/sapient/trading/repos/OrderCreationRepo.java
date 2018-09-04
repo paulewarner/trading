@@ -1,11 +1,9 @@
 package com.sapient.trading.repos;
 
-import java.sql.Connection;
+import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Date;
-
-import com.mysql.jdbc.PreparedStatement;
 import com.sapient.trading.helper.ConnectionManager;
 import com.sapient.trading.models.Order;
 
@@ -13,12 +11,12 @@ public class OrderCreationRepo {
 
 	
 	PreparedStatement stmt = null;
-	ResultSet rs = null;
+	int rs;
 	boolean res= true;
 //	public static void main(String args[]) {
 //		Date timeCreated = new Date(System.currentTimeMillis());
-//		Order order = new Order("123", "APPL", "Buy", "GTD", 12, "Apple", 
-//				"manager", "21212", 2, 343.34f, timeCreated, 44.67f, 23.78f);
+//		Order order = new Order("124", "APPL", "Buy", "GTD", 12, "Apple", 
+//				"ma", "203", 2, 343.34f, timeCreated, 44.67f, 23.78f);
 //		OrderCreationRepo ocr = new OrderCreationRepo();
 //		System.out.println(ocr.saveOrder(order));
 //	}
@@ -31,15 +29,26 @@ public class OrderCreationRepo {
 					+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
 			stmt.setString(1, order.getOrderId());
 			stmt.setString(2, order.getSymbol());
-			stmt.setString(3, order.getSide());
-			stmt.setString(4, order.getType());
+			if(order.getSide().equals("Buy")) {
+				stmt.setInt(3,0);	
+			}
+			else {
+				stmt.setInt(3,1);
+			}
+			
+			if(order.getType().equals("GTC")) {
+				stmt.setInt(4,0);	
+			}
+			else {
+				stmt.setInt(4,1);
+			}
 			stmt.setInt(5, order.getTotalQuantity());
 			stmt.setString(6, order.getStockName());
 			stmt.setFloat(7, order.getLimitPrice());
 			stmt.setFloat(8, order.getStopPrice());
 			stmt.setString(9, order.getManager());
 			stmt.setString(10, order.getportfolioID());
-			stmt.setString(11, order.getStatus());
+			stmt.setInt(11,0);
 			stmt.setDate(12, order.getTimeCreated());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -49,7 +58,7 @@ public class OrderCreationRepo {
 		
 		
 		try {
-			rs = stmt.executeQuery();
+			rs = stmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			res = false;
@@ -58,7 +67,7 @@ public class OrderCreationRepo {
 
 		
 		try {
-			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			res = false;

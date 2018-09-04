@@ -15,7 +15,7 @@ import com.sapient.trading.models.PortfolioContent;
 @Repository
 public class PortfolioContentRepo {
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	static final String DB_URL = "jdbc:mysql://localhost:3306/portfolio";
+	static final String DB_URL = "jdbc:mysql://localhost:3307/equity";
 
 	// Database credentials
 	static final String USER = "root";
@@ -39,7 +39,9 @@ public class PortfolioContentRepo {
 			System.out.println("Creating statement...");
 			stmt = conn.createStatement();
 
-			String sql = "SELECT * FROM portfolio_details JOIN order1 ON portfolio_details.Portfolio_ID=order1.Portfolio_ID";
+			String sql = "SELECT  *\r\n" + 
+					"FROM equity.order b\r\n" + 
+					"where b.Portfolio_ID = " + testportfolioidid;
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			
@@ -49,19 +51,21 @@ public class PortfolioContentRepo {
 					if(id.equals(testportfolioidid)) {
 						
 						String symbol= rs.getString("Symbol");
-						int quantity= rs.getInt("Quantity");
-						int value= rs.getInt("Valid");
+						int quantity= rs.getInt("Total_Quantity");
+						int value= rs.getInt("Actual_Price");
 						int status= rs.getInt("Status");
 						String stockname=rs.getString("Stock_Name");
 						String limitprice=rs.getString("Limit_Price");
 						String stopprice=rs.getString("Stop_Price");
 						String date=rs.getString("Time_Created");
-						String allocated=rs.getString("Open_Quantity");
-						String open=rs.getString("Allocated_Quantity");
+						String orderid = rs.getString("OrderID");
+						int allocated=rs.getInt("Open_Quantity");
+						int open=rs.getInt("Allocated_Quantity");
 						System.out.println(symbol+"\t" 	+ 	quantity+"\t" 	+ 	value+"\t"	+	status);
 						
 						
 						PortfolioContent portfoliocontent = new PortfolioContent(symbol,quantity,value, status, stockname, limitprice, stopprice, date, allocated, open);
+						portfoliocontent.setOrderID(orderid);
 						portfoliocontents.add(portfoliocontent);
 		
 					}

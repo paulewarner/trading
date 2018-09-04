@@ -140,6 +140,7 @@
         <%
         	for(Portfolio1 portfolio: portfolios){
         %>
+        	
 				<div class="portfolio" onclick="gotoPortfilioContent(<%=portfolio.getPortfolioid()%>)">
 	        	<p>Portfolio ID: <%=portfolio.getPortfolioid()%></p>
 	        	<p>Client: <%=portfolio.getPortfolioname()%></p>
@@ -176,7 +177,7 @@
 
   </body>
   <script>
-  	function gotoPortfilioConte+portfolioIdId){
+  	function gotoPortfilioContent(portfolioId){
   		location.href = "profile?pId="+portfolioId;
   	}
   	

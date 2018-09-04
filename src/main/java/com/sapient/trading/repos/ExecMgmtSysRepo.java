@@ -111,19 +111,7 @@ public boolean orderUpdate(Order newOrder) {
 					String orderId = rs.getString("OrderID");
 					String symbol = rs.getString("Symbol");
 					String side = rs.getString("Side");
-					if( side.equals("0")) {
-						side = "Buy";
-					}
-					else {
-						side = "Sell";
-					}
 					String type = rs.getString("Type");
-					if( type.equals("0")) {
-						type = "GTD";
-					}
-					else {
-						type = "GTC";
-					}
 					int totalQuantity = rs.getInt("Total_Quantity");
 					String stockName = rs.getString("Stock_Name");
 					float limitPrice = rs.getFloat("Limit_Price");
@@ -133,12 +121,6 @@ public boolean orderUpdate(Order newOrder) {
 					int openQuantity = rs.getInt("Open_Quantity");
 					int allocatedQuantity = rs.getInt("Allocated_Quantity");
 					String status = rs.getString("Status");
-					if( status.equals("0")) {
-						status = "Pending";
-					}
-					else {
-						status = "Completed";
-					}
 					float actualPrice = rs.getFloat("Actual_Price");
 					Date timeCreated = rs.getDate("Time_Created");
 					Date timeExecuted = rs.getDate("Time_executed");
@@ -150,7 +132,13 @@ public boolean orderUpdate(Order newOrder) {
 					}
 					res.setOpenQuantity(openQuantity);
 					res.setAllocatedQuantity(allocatedQuantity);
-									
+					if(status.equals("1")) {
+						res.setStatus("Pending");
+					}
+					else {
+						res.setStatus("Executed");
+					}
+					
 					
 				}
 					

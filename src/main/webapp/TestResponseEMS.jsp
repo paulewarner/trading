@@ -10,6 +10,6 @@
 <body>
 <h3>Response:</h3>
 <p>${ response } </p>
-<a href="/trading/home.jsp" class="button">Home</a>
+<a href="/trading/Homepage" class="button">Home</a>
 </body>
 </html>

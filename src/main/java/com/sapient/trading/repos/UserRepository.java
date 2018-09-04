@@ -37,6 +37,8 @@ public class UserRepository  {
 		return retrievedUserAuthority;
 	}
 	public int findAllUsers(String enteredUserId,String enteredPassword) {
+		String userID = "";
+		String password = "";
 		int enteredHashPassword = 7;
 	
 		for (int i = 0; i < enteredPassword.length(); i++) {
@@ -56,7 +58,7 @@ public class UserRepository  {
 			
 			
 			String sqlUserData =  "SELECT * FROM user";
-			String sqlAuthorityData = "SELECT UserID, UserType FROM authorities";
+			String sqlAuthorityData = "SELECT UserID, UserType FROM authorities where UserID=?";
 			
 			ResultSet rs = stmt.executeQuery(sqlUserData);
 			
@@ -64,37 +66,49 @@ public class UserRepository  {
 			
 			while (rs.next()) {
 				// Retrieve by column name
-				String userId = rs.getString("userId");
+				userID = rs.getString("userId");
 				String username = rs.getString("username");
-				String password = rs.getString("password");
+				password = rs.getString("password");
 				//int enabled = rs.getInt("enabled");
 				
 				
-				retrievedUser = new User(userId, username, password);
+				retrievedUser = new User(userID, username, password);
 				users.add(retrievedUser );
 				
 								
-				if  (userId.equals(enteredUserId)){
+				if  (userID.equals(enteredUserId)){
 					userPresence = true;
-					if(Integer.toString(enteredHashPassword).equals(password))
-					//if( new EncryptedPass().checkPass(enteredPassword, password))
-						return 1;
-					else 
-						return 2;
-					
-
+					break;
 				}
 			}		
-			ResultSet rs2 = stmt.executeQuery(sqlAuthorityData);
-			while (rs2.next()) {
-				// Retrieve by column name
-				String userId = rs.getString("userId");
-				String authority = rs.getString("authority");
-				retrievedUserAuthority = new Authority(userId, authority);
-				userAuthorities.add(retrievedUserAuthority);
-			}
+
+			
 			rs.close();
-			rs2.close();
+		
+			
+			if (userPresence) {
+				PreparedStatement pstmt = currentConn.prepareStatement(sqlAuthorityData);
+				pstmt.setString(1, userID);
+				ResultSet rs2 = pstmt.executeQuery();
+				while (rs2.next()) {
+					// Retrieve by column name
+					String userId = rs2.getString("userId");
+					String authority = rs2.getString("UserType");
+					retrievedUserAuthority = new Authority(userId, authority);
+					userAuthorities.add(retrievedUserAuthority);
+				}
+				rs2.close();
+				System.out.println("password: " + password);
+				if(Integer.toString(enteredHashPassword).equals(password))
+				//if( new EncryptedPass().checkPass(enteredPassword, password))
+					return 1;
+				else 
+					return 2;
+			}
+			
+			return 2;
+			
+			
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();

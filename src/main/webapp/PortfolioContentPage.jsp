@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" 
-		pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 		<%@ page import="java.util.*" %>
 <%@ page import="com.sapient.trading.models.PortfolioContent" %>
 <!DOCTYPE html>
@@ -148,8 +148,8 @@
                  </div>
                  <div class="buyORsellContainer">
                  
-                     <form action="mvc/forwardOrder" method="POST">
-                         <button class="button" type="submit" name="order" value="">Forward Order</button>
+                     <form action="forwardOrder" method="POST">
+                         <button class="button" type="submit" name="order" value=" <%=portfolioContent.getOrderID() %> ">Forward Order</button>
                      </form>
                        <!-- <a href="#" class="button">Forward Order</a> -->
                   </div>

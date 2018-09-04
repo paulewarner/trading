@@ -31,14 +31,17 @@ public class ExecutionManagementController {
 		List<Order> li = new ArrayList<Order>();
 		Boolean result = false;
 //		Retrieving order
-		Order tmp = EMSRepo.retrieveOrder( orderID );
+		
+		System.out.println(orderID);
+		Order tmp = EMSRepo.retrieveOrder( orderID.trim() );
+		System.out.println("order " + tmp );
 		li.add(tmp);
 		
 //		Creating EMS Service for forwarding 
 		EMSService ems = new EMSService();
 		
 //		Forwarding order
-		li = ems.forwardOrder(li);
+		li = ems.forwardOrder(tmp);
 		
 //		Updating database
 		for(Order o : li) {
@@ -55,26 +58,26 @@ public class ExecutionManagementController {
 		return "TestResponseEMS";
 	}
 	
-	@RequestMapping(path="/forwardBlock", method= RequestMethod.POST)
-	public String handleForwardedBlocks(@RequestParam("block") String blockID){
-		List<Order> li = new ArrayList<Order>();
-		
-		
-//		Creating EMS Service for forwarding 
-		EMSService ems = new EMSService();
-		
-//		Populating list of orders
-		li = EMSRepo.retrieveBlock(blockID);
-		
-//		Forwarding order
-		li = ems.forwardOrder(li);
-		
-//		Updating database
-		for(Order o : li) {
-			EMSRepo.orderUpdate(o);
-		}
-		
-		return "res";
-	}
-	
+//	@RequestMapping(path="/forwardBlock", method= RequestMethod.POST)
+//	public String handleForwardedBlocks(@RequestParam("block") String blockID){
+//		List<Order> li = new ArrayList<Order>();
+//		
+//		
+////		Creating EMS Service for forwarding 
+//		EMSService ems = new EMSService();
+//		
+////		Populating list of orders
+//		li = EMSRepo.retrieveBlock(blockID);
+//		
+////		Forwarding order
+//		li = ems.forwardOrder(li);
+//		
+////		Updating database
+//		for(Order o : li) {
+//			EMSRepo.orderUpdate(o);
+//		}
+//		
+//		return "res";
+//	}
+//	
 }

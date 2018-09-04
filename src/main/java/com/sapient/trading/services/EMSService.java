@@ -11,13 +11,15 @@ public class EMSService {
 	
 	BrokerService bs = new BrokerService();
 	
-	public List<Order> forwardOrder(List<Order> orders) {
+	public List<Order> forwardOrder(Order o) {
 		List<Order> tempOrders = new ArrayList<Order>();
 		
-		for(Order o : orders) {
+		
 			
+			System.out.println(o);
 			List<EquityResponse> eqResponses = new ArrayList<EquityResponse>();
 			
+			//System.out.println("o.getTotalQuantity()" + o);
 			int total = o.getTotalQuantity();
 			System.out.println("Total amount: " + total + " of order: " + o.getOrderId());
 			if(total >= 1000 && total < 10000) {
@@ -72,7 +74,7 @@ public class EMSService {
 				tempOrders.add(this.handleResponses(eqResponses, o));
 				
 			}
-		}
+		
 		return tempOrders;
 	}
 	

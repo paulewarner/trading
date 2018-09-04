@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.sapient.trading.repos.HomePageRepo;
 import com.sapient.trading.repos.PortfolioContentRepo;
 import com.sapient.trading.repos.UserSession;
+import com.sapient.trading.models.Portfolio;
 import com.sapient.trading.models.Portfolio1;
 import com.sapient.trading.models.PortfolioContent;
 
@@ -28,13 +29,17 @@ public class tradingControllers {
 	UserSession session;
 
 	@RequestMapping(path="/Homepage", method=RequestMethod.GET)
-	public String loginpage(Model model,@RequestParam("user_id") String userid){
+	public String loginpage(Model model){
 		HashSet<Portfolio1> portfolio1s = new HashSet<Portfolio1>();
-		System.out.println(userid);
-		portfolio1s=homerepo.getlistofportfolios(userid);
-		System.out.println(portfolio1s);
+		portfolio1s=homerepo.getlistofportfolios(session.getUser().getUserId());
+		System.out.println("result:");
+		for(Portfolio1 p : portfolio1s) {
+			System.out.println(p);
+		}
+		
 		model.addAttribute("portfolios",portfolio1s);
 		model.addAttribute("name", session.getUser().getUsername());
+		System.out.println(session.getAuthorities());
 		model.addAttribute("portfolioType", session.getAuthorities().getAccountType());
 		return "Homepage";		
 	}
