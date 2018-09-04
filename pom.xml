@@ -6,6 +6,13 @@
   <packaging>war</packaging>
   <name>Trading Platform</name>
   <dependencies>
+  <!-- https://mvnrepository.com/artifact/pl.zankowski/iextrading4j -->
+	<dependency>
+		<groupId>pl.zankowski</groupId>
+		<artifactId>iextrading4j-all</artifactId>
+		<version>2.2.1</version>
+	</dependency>
+	
     <dependency>
   		<groupId>org.springframework</groupId>
   		<artifactId>spring-core</artifactId>
