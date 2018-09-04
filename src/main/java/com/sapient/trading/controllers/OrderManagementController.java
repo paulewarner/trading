@@ -28,10 +28,13 @@ public class OrderManagementController {
 	List<Order> listOfOrders;
 	
 	@RequestMapping(path="/createOrder",method=RequestMethod.GET)
-	public String receive(Model model) {
+	public String receive(Model model, @RequestParam("company")String companyName, @RequestParam("price")String companyPrice, @RequestParam("ticker")String companyTicker) {
+		model.addAttribute("name", companyName);
+		model.addAttribute("price", companyPrice);
+		model.addAttribute("ticker", companyTicker);
 		model.addAttribute("isOrdersPage", false);
 		model.addAttribute("activeTab", 1);
-		return "createOrder";
+		return "CreateOrder";
 	}
 	@RequestMapping(path="/createOrder",method=RequestMethod.POST)
 	public boolean createOrder(Model model, 
