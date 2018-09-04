@@ -12,6 +12,5 @@
 			<li>This is the create order page</li>
 			<li>This is the search page</li>
 		</ul>
-		<%@ include file="scripts.jsp" %>
 	</body>
 </html>
