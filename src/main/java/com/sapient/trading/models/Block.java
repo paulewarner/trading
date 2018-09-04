@@ -17,7 +17,7 @@ public class Block {
 		super();
 		this.blockId = blockId;
 		this.symbol = symbol;
-		this.side = side;
+		this.side = side; 			
 		this.status = status;
 					
 		this.totalQuantity = totalQuantity;

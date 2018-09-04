@@ -8,11 +8,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import java.sql.PreparedStatement;
 import com.sapient.trading.models.Block;
 import com.sapient.trading.models.EquityResponse;
 import com.sapient.trading.models.Order;
 
+@Repository
 public class ExecMgmtSysRepo {
 
 	private Block block;

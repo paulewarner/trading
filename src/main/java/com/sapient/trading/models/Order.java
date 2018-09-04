@@ -1,13 +1,15 @@
 package com.sapient.trading.models;
 
+import java.sql.Date;
+
 import org.springframework.stereotype.Component;
 
 public class Order {
 
 	private String orderId;
 	private String symbol;
-	private String side;
-	private String type;
+	private String side;		// In database its '0' for Buy and '1' for Sell
+	private String type;		// In database its '0' for GTD and '1' for GTC
 	private int totalQuantity;
 	private String stockName;
 	private float limitPrice;
@@ -16,7 +18,7 @@ public class Order {
 	private String portfolioID;
 	private int openQuantity;
 	private int allocatedQuantity;
-	private String status;
+	private String status;		// In database its '0' for Pending and '1' for Completed
 	private float currentPrice;
 	private Date timeCreated;
 	private Date timeExecuted;
