@@ -53,27 +53,8 @@ html, body {
 	margin-left: auto;
 	margin-right: auto;
 }
-#myUL
- 
-li
- 
-a
-:hover
-:not
- 
-(
-.header
- 
-)
-{
-background-color
-:
- 
-#eee
-;
-/* Add a hover effect to all links, except for headers */
-
-
+#myUL li a:hover:not(.header){
+background-color:#eee;/* Add a hover effect to all links, except for headers */
 }
 </style>
 <%@ include file="commonheader.jsp" %>

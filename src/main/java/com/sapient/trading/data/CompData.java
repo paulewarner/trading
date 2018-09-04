@@ -44,15 +44,16 @@ public class CompData {
 		
 	}
 
-	/********************************************************************************
-	 * takes in list of exchangesymbol info and returns a list of just company names
-	 * used for live search 
+	/**
+	 * takes in list of exchangeSymbol info and returns a list of just company 
+	 * names used for live search 
 	 * @param esList
 	 * @return list of company names
 	 * 
 	 * */
 	public List<String> allCompNames(List<ExchangeSymbol> esList){
-		List<String> allComps = esList.stream().map(p->p.getName()).collect(Collectors.toList());
+		List<String> allComps = esList.stream().map(p->p.getName())
+				.collect(Collectors.toList());
 		return allComps;
 	}
 	
@@ -67,7 +68,8 @@ public class CompData {
 	 * 		  Data about a company
 	 */
 	public void add(ExchangeSymbol es) {
-		this.tickers.put(es.getName().toLowerCase(), es.getSymbol().toLowerCase());
+		this.tickers.put(es.getName().toLowerCase(), 
+				es.getSymbol().toLowerCase());
 		this.compName.add(es.getName().toLowerCase());
 	}
 	

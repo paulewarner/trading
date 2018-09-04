@@ -23,7 +23,8 @@ public class Company {
 	
 	
 	/******************Constructors*************************/
-	public Company(String name, String tick, BigDecimal price, BigDecimal priceChange, BigDecimal percentChange) {
+	public Company(String name, String tick, BigDecimal price, 
+			BigDecimal priceChange, BigDecimal percentChange) {
 		super();
 		this.name = name;
 		this.tick = tick;
@@ -146,7 +147,8 @@ public class Company {
 	/*******************Methods*************************/
 	@Override
 	public String toString() {
-		return "Company [name=" + name + ", tick=" + tick + ", price=" + price + ", priceChange=" + priceChange
+		return "Company [name=" + name + ", tick=" + tick +
+				", price=" + price + ", priceChange=" + priceChange
 				+ ", percentChange=" + percentChange + "]";
 	}
 

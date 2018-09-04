@@ -12,6 +12,7 @@ import com.sapient.trading.models.User;
 @Component
 @Scope(value = "session",  proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserSession {
+	
 	private Authority authorities;
 
 	public Authority getAuthorities() {

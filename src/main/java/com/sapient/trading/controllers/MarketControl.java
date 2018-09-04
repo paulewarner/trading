@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sapient.trading.data.CompData;
+import com.sapient.trading.models.Authority;
 import com.sapient.trading.models.Company;
+import com.sapient.trading.models.User;
 import com.sapient.trading.repos.MarketDataRepo;
+import com.sapient.trading.repos.UserSession;
 
 import pl.zankowski.iextrading4j.api.exception.IEXTradingException;
 import pl.zankowski.iextrading4j.api.refdata.ExchangeSymbol;
@@ -23,6 +26,9 @@ import pl.zankowski.iextrading4j.client.rest.request.refdata.SymbolsRequestBuild
 
 @Controller
 public class MarketControl {
+	/** usr is current session and has information about the current user. */
+	@Autowired
+	UserSession usr;
 	
 	/** repo takes care of communication with the IEX api. */
 	@Autowired
@@ -40,6 +46,9 @@ public class MarketControl {
 			executeRequest(new SymbolsRequestBuilder().build());
 	cd.addData(exchangeSymbolList);
 	compNames = cd.allCompNames(exchangeSymbolList);
+//	Authority a = new Authority("David","Kim");
+//	usr.setAuthorities(a);
+//	usr.setUser(new User("hello","world","this",1));
 	}
 	
 	/**********************************Methods********************************/
@@ -82,6 +91,8 @@ public class MarketControl {
 			System.out.println("hello");
 			return "invalid";
 		}
+		model.addAttribute("name", usr.getUser().getUsername());
+		model.addAttribute("profileType", usr.getAuthorities().getAccountType());
 		model.addAttribute("companies", compList);
 		model.addAttribute("companyNames", compNames);
 		return "SearchPageResults";
@@ -120,6 +131,8 @@ public class MarketControl {
 			System.out.println("hello");
 			return "invalid";
 		}
+		model.addAttribute("name", usr.getUser().getUsername());
+		model.addAttribute("profileType", usr.getAuthorities().getAccountType());
 		model.addAttribute("company", repo.detailedInfo(comp));
 		model.addAttribute("companyNames", compNames);
 		return "SearchPageResultsDetails";
@@ -139,6 +152,8 @@ public class MarketControl {
 	 */
 	@RequestMapping(path="/start", method=RequestMethod.GET)
 	public String search(Model model) {
+		model.addAttribute("name", usr.getUser().getUsername());
+		model.addAttribute("profileType", usr.getAuthorities().getAccountType());
 		model.addAttribute("companies", compNames);
 		return "SearchPage";
 	}
