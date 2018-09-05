@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+		pageEncoding="UTF-8"%>
 		<%@ page import="java.util.*" %>
 <%@ page import="com.sapient.trading.models.PortfolioContent" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<%@include file="commonheader.jsp" %>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -98,34 +97,36 @@
 </head>
        
 <body>
-	<%@ include file="header.jsp" %>
-        <h1>Orders</h1>
+    <h1>Orders</h1>
     <div class="ordersContainer">
     <%List<PortfolioContent> portfolioContents= (List<PortfolioContent>)request.getAttribute("portfoliocontents");%>
+    <%int i= 0; %>
     <%for(PortfolioContent portfolioContent: portfolioContents){ if(portfolioContent.getStatus()!=0){%>
          <div class="orderDetailsContainer">
              <div class="orderInfoContainerParent">
-                <div class="orderInfoContainer" onclick="showPopupForward()">
+                <div class="orderInfoContainer" onclick="showPopupForward(<%=i%>)">
                     <p>NASDAQ:<%=portfolioContent.getSymbol() %></p>
                     <p>Quantity Held: <%=portfolioContent.getQuantity() %></p>
                     <p>Total Equity: $<%=portfolioContent.getValue() %></p>
-                    <p>Status:<%=portfolioContent.getStatus() %></p>
+                    <p>Status:<%if(portfolioContent.getStatus()==0){%>New<%}else if(portfolioContent.getStatus()==1){ %>Open<%}else{ %>Close<%} %></p>
               </div>
-              <div class="buyORsellContainer">
+              <%Integer userType=  Integer.parseInt((String)request.getAttribute("portfolioType")); %>
+              <div class="buyORsellContainer" style="<%if(userType == 0){ %>display: none;<%} %> >
                     <a href="/trading/mvc/createOrder" class="button">Buy/Sell</a>
               </div>
+              
              </div>
-              <div class="popWindowContainer" id="popWindowContainerForwarded">
-                    <div class="popWindowContainerElement">Stock Name: <%=portfolioContent.getStockname() %></div>
-                    <div class="popWindowContainerElement">Limit Price: $<%=portfolioContent.getLimitprice() %></div>
-                    <div class="popWindowContainerElement">Stop Price:$<%=portfolioContent.getStopprice() %></div>
-                    <div class="popWindowContainerElement">Created By: Sam Smith</div>
+              <div class="popWindowContainer" id="popWindowContainerForwarded<%=i++%>" style="display: none;">
+                    <div class="popWindowContainerElement ">Stock Name: <%=portfolioContent.getStockname() %></div>
+                    <div class="popWindowContainerElement ">Limit Price: $<%=portfolioContent.getLimitprice() %></div>
+                    <div class="popWindowContainerElement ">Stop Price:$<%=portfolioContent.getStopprice() %></div>
+                    <div class="popWindowContainerElement">Created By: ${username}</div>
                     <div class="popWindowContainerElement">Broker Name: Mit Kurale</div>
                     <div class="popWindowContainerElement statusContainer"> 
                         <div>Status:</div>
                         <div>
-                            <div class="completed">65000: Completed</div>
-                            <div class="pending">35000: Pending</div>
+                            <div class="completed"><%=portfolioContent.getAllocated() %>: Completed</div>
+                            <div class="pending"><%=portfolioContent.getOpen() %>: Pending</div>
                         </div>
                     </div>
 
@@ -137,10 +138,11 @@
 
     <h2>Unforwarded</h2>
     <div class="ordersContainer">
+    <%int j=0; %>
     <%for(PortfolioContent portfolioContent: portfolioContents){ if(portfolioContent.getStatus()==0){%>
             <div class="orderDetailsContainer">
                 <div class="orderInfoContainerParent">
-                   <div class="orderInfoContainer" onclick="showPopupUnForward()">
+                   <div class="orderInfoContainer" onclick="showPopupUnForward(<%=j%>)">
                        <p>Date Created:08/29/18</p>
                        <p>NYSE: <%=portfolioContent.getSymbol() %></p>
                        <p>Number of Stocks:<%=portfolioContent.getQuantity() %></p>
@@ -148,19 +150,19 @@
                  </div>
                  <div class="buyORsellContainer">
                  
-                     <form action="forwardOrder" method="POST">
-                         <button class="button" type="submit" name="order" value=" <%=portfolioContent.getOrderID() %> ">Forward Order</button>
+                     <form action="mvc/forwardOrder" method="POST">
+                         <button class="button" type="submit" name="order" value="">Forward Order</button>
                      </form>
                        <!-- <a href="#" class="button">Forward Order</a> -->
                   </div>
                 </div>
             </div>
-            <div class="popWindowContainer" id="popWindowContainerUnForwarded">
+            <div class="popWindowContainer" id="popWindowContainerUnForwarded<%=j++%>" style="display: none;">
                             <div class="popWindowContainerElement1">Stock Name: <%=portfolioContent.getStockname() %></div>
                             <div class="popWindowContainerElement1">Stock Quantity:<%=portfolioContent.getQuantity() %></div>
                             <div class="popWindowContainerElement1">Stop Price:$<%=portfolioContent.getStopprice() %></div>
                             <div class="popWindowContainerElement1">Limit Price: $<%=portfolioContent.getLimitprice() %></div>
-                            <div class="popWindowContainerElement1">Created By: Sam Smith</div>
+                            <div class="popWindowContainerElement1">Created By: ${username}</div>
                             <div class="popWindowContainerElement1">Broker Name: Mit Kurale</div>
                             <div class="popWindowContainerElement statusContainer"> 
             </div>
@@ -168,15 +170,23 @@
      </div>
 </body>
 <script>
-    function showPopupForward(){
-        document.getElementById("popWindowContainerForwarded").style.display= "flex";
-        document.getElementById("popWindowContainerUnForwarded").style.display= "none";
+	var lastClickedForwarded;
+	var lastClickedUnForwarded;
+    function showPopupForward(i) {
+    	if (typeof lastClickedForwarded !== 'undefined') {
+    		lastClickedForwarded.style.display = 'none';
+    	
+    	}
+        lastClickedForwarded = document.getElementById("popWindowContainerForwarded"+i);
+        lastClickedForwarded.style.display= "flex";
     }
-    function showPopupUnForward(){
-        document.getElementById("popWindowContainerUnForwarded").style.display= "flex";
-        document.getElementById("popWindowContainerForwarded").style.display= "none";
+    function showPopupUnForward(i) {
+    	if (typeof lastClickedUnForwarded !== 'undefined') {
+    		lastClickedForwarded.style.display = 'none';
+    	
+    	}
+        lastClickedUnForwarded = document.getElementById("popWindowContainerUnForwarded"+i);
+        lastClickedUnForwarded.style.display= "flex";
     }
-    
-    document.getElementById('navitems').children[0].classList.add('active');
 </script>
 </html>
