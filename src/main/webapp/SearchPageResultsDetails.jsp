@@ -258,6 +258,9 @@ background-color:#eee;/* Add a hover effect to all links, except for headers */
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 		crossorigin="anonymous"></script>
+	<script>
+		document.getElementById('navitems').children[1].classList.add('active');
+	</script>
 
 </body>
 </html>
