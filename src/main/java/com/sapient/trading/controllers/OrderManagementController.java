@@ -73,7 +73,7 @@ public class OrderManagementController {
         
     manager =session.getUser().getUserId();
     Date timeCreated = new Date(System.currentTimeMillis());
-        blockid = rand.nextInt(1000)+"";
+        blockid = Math.abs(rand.nextInt(1000))+"";
         
 
         OrderCreationRepo ocr = new OrderCreationRepo();
@@ -86,7 +86,7 @@ public class OrderManagementController {
             if(totalQuantity%10000>0)
                 num++;
             for(int i =0;i<num;i++) {
-                orderid= Integer.toString(rand.nextInt()).substring(0, 3);
+                orderid= Integer.toString(Math.abs(rand.nextInt())).substring(0, 3);
                 if(i==num-1) {
                     quant = totalQuantity%10000;
                
@@ -110,7 +110,7 @@ public class OrderManagementController {
             
         } else {
         	
-            orderid= Integer.toString(rand.nextInt()).substring(0, 3);
+            orderid= Integer.toString(Math.abs(rand.nextInt())).substring(0, 3);
 
             order = new Order(orderid, ticker, side, type, totalQuantity, compName, 
                     manager, portfolioID, 0, limitPrice, timeCreated, limitPrice, stopPrice);
@@ -123,13 +123,6 @@ public class OrderManagementController {
         
       
         
-        
-////        OrderValidator validator = new OrderValidator();
-//        
-//        // Insert error page here for invalid orders
-//        if(validator.validateOrder(order)) {
-//            System.out.println("Invalid Order!");
-//        }
         
         
         

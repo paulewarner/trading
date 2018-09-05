@@ -165,8 +165,8 @@ input[type=number]::-webkit-outer-spin-button {
                         </div>
 
                         <div class="col-sm-2">
-                        	<label for="side">Type</label><br>
-                            <select name="Buy/Sell" id="sdie">
+                        	<label for="side">Side</label><br>
+                            <select name="Buy/Sell" id="side">
                                 <option value="0">Buy</option>
                                 <option value="1">Sell</option>
                             </select>

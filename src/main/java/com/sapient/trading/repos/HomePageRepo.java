@@ -33,7 +33,7 @@ public class HomePageRepo {
 			Connection conn = null;
 			Statement stmt = null;
 			HashSet<Portfolio1> portfolio1s = new HashSet<Portfolio1>();
-			
+			String Username = "";
 			try {
 				//  Register JDBC driver
 				Class.forName("com.mysql.jdbc.Driver");
@@ -47,6 +47,16 @@ public class HomePageRepo {
 				System.out.println("Creating statement...");
 				stmt = conn.createStatement();
 				List<String > portfolioList = new ArrayList<String>();
+				String sql3 = "SELECT * FROM user";
+				ResultSet rs2 = stmt.executeQuery(sql3);
+				while(rs2.next()) {
+				String userid = rs2.getString("UserID");
+				String username= rs2.getString("Username");
+				if(testuserid.equals(userid)) {
+				Username=username;
+				}
+				}
+				
 
 				String sql = "SELECT * FROM portfolio_user";
 				ResultSet rs = stmt.executeQuery(sql);
@@ -62,45 +72,36 @@ public class HomePageRepo {
 				System.out.println(portfolioList);
 				
 				
-				String sql1 = "select * from\r\n" + 
-						"equity.portfolio_details a\r\n" + 
-						"join equity.portfolio_user b\r\n" + 
-						"on a.Portfolio_ID = b.Portfolio_ID\r\n" + 
-						"where b.UserID = " + testuserid;
-				
-				for(String portfolioNumber: portfolioList) {
-					traders = new ArrayList<String>();
-					String portfolioname1 = null,portfoliomanager1 = null;
-					ResultSet rs1 = stmt.executeQuery(sql1);
-					String  portfoliotradersname = null;
-					
-			
-					while(rs1.next()) {
-						System.out.println("portfolioNumber abhinish " + portfolioNumber);
+				String sql1 = "SELECT distinct P.Portfolio_ID, P.Portfolio_Name, O.Manager ,PU.UserID,U.Username \r\n" + 
+						"FROM equity.portfolios P, equity.order O, equity.portfolio_user PU ,equity.User U \r\n" + 
+						"WHERE P.Portfolio_ID=O.Portfolio_ID AND P.Portfolio_ID=PU.Portfolio_ID AND PU.UserID=U.UserID";
+						for(String portfolioNumber: portfolioList) {
+						traders = new ArrayList<String>();
+						String portfolioname1 = null,portfoliomanager1 = null;
+						ResultSet rs1 = stmt.executeQuery(sql1);
+						while(rs1.next()) {
 						String portfolioid= rs1.getString("portfolio_ID");
-						System.out.println("inside res set " + portfolioid);
 						if(portfolioNumber.equals(portfolioid)) {
-							System.out.println("inside result set");
-							String portfolioname= rs1.getString("Stock_Name");
-							String portfoliomanager=rs1.getString("UserID");
-							String  portfoliotraders=rs1.getString("UserID");
-							String username = rs1.getString("Symbol");
-							
-							portfolioname1=portfolioname;
-							portfoliomanager1=portfoliomanager;
-							if(!portfoliotraders.equals(testuserid) && !traders.contains(portfoliotraders)) {
-								traders.add(username);
-							}
+						String portfolioname= rs1.getString("Portfolio_Name");
+						String portfoliomanager=rs1.getString("Manager");
+						String  portfoliotraders=rs1.getString("UserID");
+						String username = rs1.getString("Username");
+						portfolioname1=portfolioname;
+						portfoliomanager1=portfoliomanager;
+						if(!portfoliotraders.equals(testuserid) && !traders.contains(portfoliotraders)) {
+						traders.add(username);
 						}
-					}
+						}
+						}
+						System.out.println(portfolioname1+portfoliomanager1+traders);
+						Portfolio1 portfolio1 = new Portfolio1(portfolioNumber,portfolioname1,portfoliomanager1,traders,Username);
+						portfolio1s.add(portfolio1);
+						rs1.close();
+						}
+						rs.close();
+
 					
-					System.out.println(" jan test " + portfolioname1+portfoliomanager1+traders);
-					Portfolio1 portfolio1 = new Portfolio1(portfolioNumber,portfolioname1,portfoliomanager1,traders);
-					portfolio1s.add(portfolio1);
-					rs1.close();
-				
-				}
-				rs.close();
+					
 			} catch (SQLException se) {
 				// Handle errors for JDBC
 				se.printStackTrace();

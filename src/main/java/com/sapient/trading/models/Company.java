@@ -30,7 +30,7 @@ public class Company {
 		this.tick = tick;
 		this.price = price;
 		this.priceChange = priceChange;
-		this.percentChange = percentChange;
+		this.percentChange = percentChange.multiply(new BigDecimal(100));
 	}
 
 

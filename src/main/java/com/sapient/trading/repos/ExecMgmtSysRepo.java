@@ -50,14 +50,14 @@ public boolean orderUpdate(Order newOrder) {
 //		Setting open quantity
 		stmt.setInt(1, newOrder.getOpenQuantity());
 //		Setting closed quantity
-		stmt.setInt(2, newOrder.getOpenQuantity());
+		stmt.setInt(2, newOrder.getAllocatedQuantity());
 //		Setting status
-		int st=1;
+		int st=0;
 		if(newOrder.getStatus().equals("Pending")) {
-			st = 0;
+			st = 1;
 		}
 		else {
-			st = 1;
+			st = 2;
 		}
 		stmt.setInt(3, st);
 //		Setting time of execution

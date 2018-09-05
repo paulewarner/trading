@@ -39,8 +39,8 @@ public class BlockCreationRepo {
 		conn = ConnectionManager.getConnection();
 		for (int i = 0; i < block.getListOfOrders().size(); i++) {
 			try {
-				PreparedStatement stmt = (PreparedStatement) conn
-						.prepareStatement("INSERT into equity.block_order (BlockID, OrderID)" + "VALUES (?,?)");
+				PreparedStatement stmt = (PreparedStatement) conn.prepareStatement
+				("INSERT into equity.block_order (BlockID, OrderID)" + "VALUES (?,?)");
 				stmt.setString(1, block.getBlockID());
 				stmt.setString(2, block.getListOfOrders().get(i).getOrderId());
 				rs = stmt.executeUpdate();

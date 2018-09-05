@@ -8,13 +8,23 @@ public class Portfolio1 {
 	String portfolioname;
 	String portfoliomanager;
 	List<String> traders;
+	String username;
 	
-	public Portfolio1(String portfolioid, String portfolioname, String portfoliomanager, List<String> traders) {
+	public Portfolio1(String portfolioid, String portfolioname, String portfoliomanager, List<String> traders, String username) {
 		super();
 		this.portfolioid = portfolioid;
 		this.portfolioname = portfolioname;
 		this.portfoliomanager = portfoliomanager;
 		this.traders = traders;
+		this.username = username;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPortfolioid() {
@@ -51,9 +61,12 @@ public class Portfolio1 {
 
 	@Override
 	public String toString() {
-		return "Portfolio [portfolioid=" + portfolioid + ", portfolioname=" + portfolioname + ", portfoliomanager="
-				+ portfoliomanager + ", traders=" + traders + "]";
+		return "Portfolio1 [portfolioid=" + portfolioid + ", portfolioname=" + portfolioname + ", portfoliomanager="
+				+ portfoliomanager + ", traders=" + traders + ", username=" + username + "]";
 	}
+
+	
+	
 	
 	
 	

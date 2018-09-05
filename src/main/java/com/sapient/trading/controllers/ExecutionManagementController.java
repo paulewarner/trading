@@ -49,13 +49,13 @@ public class ExecutionManagementController {
 		}
 		
 		System.out.println(result);
-		if(result) {
-			model.addAttribute("response", "successfully added");
-		} else {
-			model.addAttribute("response", "failed to add");
-		}
+//		if(result) {
+//			model.addAttribute("response", "successfully added");
+//		} else {
+//			model.addAttribute("response", "failed to add");
+//		}
 		
-		return "TestResponseEMS";
+		return "redirect:/mvc/Homepage";
 	}
 	
 //	@RequestMapping(path="/forwardBlock", method= RequestMethod.POST)
