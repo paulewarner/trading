@@ -27,11 +27,11 @@ public class LoginController {
 		return "login";
 	}
 	
-	@RequestMapping(path="/logout", method=RequestMethod.GET)
+	@RequestMapping(path="/logout", method=RequestMethod.POST)
 	public String logout(Model model) {
 		session.setAuthorities(null);
 		session.setUser(null);
-		return "redirect:/login";
+		return "redirect:/mvc/login";
 	}
 	
 	@RequestMapping(path="/portfolioX",method=RequestMethod.POST)

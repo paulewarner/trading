@@ -22,7 +22,7 @@ import com.sapient.trading.repos.UserSession;
 @Controller
 public class OrderManagementController {
 
-	Random rand;
+	Random rand = new Random();
     //CompanyReceiver compReceiver;
     private int orderID = 0;
     private int blockID = 0;

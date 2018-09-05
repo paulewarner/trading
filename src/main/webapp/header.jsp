@@ -17,14 +17,19 @@
 		<div class="nav">
 		<ul id="navitems" class="nav nav-tabs">
 			<li class="nav-item nav-link">
-				<a href="/trading/mvc/Home">Home</a>
+				<a href="/trading/mvc/Homepage">Home</a>
 			</li>
 			<li class="nav-item nav-link">
-				<a href="/trading/mvc/CreateOrder">Create Order</a>
+				<a href="/trading/mvc/seeMore?ticker=C%2BA&dropdown=ticker">Create Order</a>
 			</li>
 			<li class="nav-item nav-link">
 			    <a href="/trading/mvc/start">Search</a>
 			</li>
 		</ul>
-<span class="left-navitem"><button type="button" class="btn header-button">Logout</button></span>
+<span class="left-navitem">
+	<form action="/trading/mvc/logout" method = "Post"">
+		<button type="submit" class="btn header-button">Logout</button>
+	</form>
+
+</span>
 </div>
