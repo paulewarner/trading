@@ -104,6 +104,7 @@ input[type=number]::-webkit-outer-spin-button {
                    		<% } %>
                     </select> 
                 </div>
+                
             </div>
 
             
@@ -147,7 +148,10 @@ input[type=number]::-webkit-outer-spin-button {
                     <div class="row">
                         <div class="col-sm-2">
                             <label for="type">Type</label><br>
-                            <input type="number" name="type" id="" placeholder="type">
+                            <select name="type" id="type">
+                                <option value="gtc">GTC</option>
+                                <option value="gtd">GTD</option>
+                            </select>
                         </div>
 
                         <div class="col-sm-2">
@@ -155,13 +159,18 @@ input[type=number]::-webkit-outer-spin-button {
                             <input type="number" name="stopPrice" id="" placeholder="Stop Loss">
                         </div>
 
-                        <div class="col-sm-1"></div>
                         <div class="col-sm-4">
                             <label for="note">Note</label><br>
-                            <input type="text" name="note" id="" placeholder="Minimum 50 characters">
+                            <input type="text" name="note" id="" placeholder="Optional">
                         </div>
 
-                        <div class="col-sm-1"></div>
+                        <div class="col-sm-2">
+                        	<label for="side">Type</label><br>
+                            <select name="Buy/Sell" id="sdie">
+                                <option value="0">Buy</option>
+                                <option value="1">Sell</option>
+                            </select>
+                        </div>
                         <div class="col-sm-2">
                             <input type="submit" class="order-button" value="Order">
                         </div>
