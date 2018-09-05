@@ -16,7 +16,6 @@ import com.sapient.trading.repos.HomePageRepo;
 import com.sapient.trading.repos.PortfolioContentRepo;
 import com.sapient.trading.repos.UserSession;
 import com.sapient.trading.models.Portfolio;
-import com.sapient.trading.models.Portfolio1;
 import com.sapient.trading.models.PortfolioContent;
 
 @Controller
@@ -30,10 +29,10 @@ public class tradingControllers {
 
 	@RequestMapping(path="/Homepage", method=RequestMethod.GET)
 	public String loginpage(Model model){
-		HashSet<Portfolio1> portfolio1s = new HashSet<Portfolio1>();
+		HashSet<Portfolio> portfolio1s = new HashSet<Portfolio>();
 		portfolio1s=homerepo.getlistofportfolios(session.getUser().getUserId());
 		System.out.println("result:");
-		for(Portfolio1 p : portfolio1s) {
+		for(Portfolio p : portfolio1s) {
 			System.out.println(p);
 		}
 		

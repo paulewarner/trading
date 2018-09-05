@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*" %>
-<%@ page import="com.sapient.trading.models.Portfolio1" %>
+<%@ page import="com.sapient.trading.models.Portfolio" %>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -135,10 +135,10 @@
     <div class="containerDiv">
         <div id="portfolioInfoContainer">
         <%
-        	HashSet<Portfolio1> portfolios = (HashSet<Portfolio1>)request.getAttribute("portfolios");int i=0;
+        	HashSet<Portfolio> portfolios = (HashSet<Portfolio>)request.getAttribute("portfolios");int i=0;
         %>
         <%
-        	for(Portfolio1 portfolio: portfolios){
+        	for(Portfolio portfolio: portfolios){
         %>
         	
 				<div class="portfolio" onclick="gotoPortfilioContent(<%=portfolio.getPortfolioid()%>)">

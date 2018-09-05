@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
-import com.sapient.trading.models.Portfolio1;
+import com.sapient.trading.models.Portfolio;
 import com.sapient.trading.models.PortfolioContent;
 import com.sapient.trading.models.UserAndPortfolio;
 @Repository
@@ -27,12 +27,12 @@ public class HomePageRepo {
 		
 		List<PortfolioContent> portfoliocontents = new ArrayList<PortfolioContent>();
 		List<String> traders;
-		Portfolio1 portfolio1;
+		Portfolio portfolio1;
 		
-		public HashSet<Portfolio1> getlistofportfolios(String testuserid) {
+		public HashSet<Portfolio> getlistofportfolios(String testuserid) {
 			Connection conn = null;
 			Statement stmt = null;
-			HashSet<Portfolio1> portfolio1s = new HashSet<Portfolio1>();
+			HashSet<Portfolio> portfolio1s = new HashSet<Portfolio>();
 			String Username = "";
 			try {
 				//  Register JDBC driver
@@ -94,7 +94,7 @@ public class HomePageRepo {
 						}
 						}
 						System.out.println(portfolioname1+portfoliomanager1+traders);
-						Portfolio1 portfolio1 = new Portfolio1(portfolioNumber,portfolioname1,portfoliomanager1,traders,Username);
+						Portfolio portfolio1 = new Portfolio(portfolioNumber,portfolioname1,portfoliomanager1,traders,Username);
 						portfolio1s.add(portfolio1);
 						rs1.close();
 						}
