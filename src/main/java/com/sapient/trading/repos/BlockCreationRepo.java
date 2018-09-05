@@ -16,21 +16,6 @@ public class BlockCreationRepo {
 	
 	int rs;
 	boolean result = true;
-	
-	public static void main(String args[]) {
-		List<Order> listOfOrders = new ArrayList<>();
-		Date timeCreated = new Date(System.currentTimeMillis());
-		Order order = new Order("661", "APPL", "Buy", "GTD", 12, "Apple", 
-				"ma", "203", 2, 343.34f, timeCreated, 44.67f, 23.78f);
-		OrderCreationRepo ocr = new OrderCreationRepo();
-		ocr.saveOrder(order);
-		listOfOrders.add(order);
-		BlockForOrderManagement block = new BlockForOrderManagement("447", "asjkhgjkd", listOfOrders);
-		BlockCreationRepo bcr = new BlockCreationRepo();
-		
-		System.out.println(bcr.updateBlockDetails(block));
-		System.out.println(bcr.updateBlockOrder(block));
-	}
 
 	public boolean updateBlockDetails(BlockForOrderManagement block) {
 		conn = ConnectionManager.getConnection();

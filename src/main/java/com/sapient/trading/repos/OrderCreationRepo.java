@@ -13,13 +13,7 @@ public class OrderCreationRepo {
 	PreparedStatement stmt = null;
 	int rs;
 	boolean res= true;
-//	public static void main(String args[]) {
-//		Date timeCreated = new Date(System.currentTimeMillis());
-//		Order order = new Order("124", "APPL", "Buy", "GTD", 12, "Apple", 
-//				"ma", "203", 2, 343.34f, timeCreated, 44.67f, 23.78f);
-//		OrderCreationRepo ocr = new OrderCreationRepo();
-//		System.out.println(ocr.saveOrder(order));
-//	}
+
 	public boolean saveOrder(Order order) {
 		
 		Connection conn = ConnectionManager.getConnection();
@@ -36,7 +30,7 @@ public class OrderCreationRepo {
 				stmt.setInt(3,1);
 			}
 			
-			if(order.getType().equals("GTC")) {
+			if(order.getType().equals("gtc")) {
 				stmt.setInt(4,0);	
 			}
 			else {

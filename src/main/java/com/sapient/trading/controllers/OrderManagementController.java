@@ -73,7 +73,9 @@ public class OrderManagementController {
         
     manager =session.getUser().getUserId();
     Date timeCreated = new Date(System.currentTimeMillis());
-        blockid = blockID+"";
+        blockid = rand.nextInt(1000)+"";
+        
+
         OrderCreationRepo ocr = new OrderCreationRepo();
         ArrayList<Order> listOfOrders = new ArrayList<>();
         manager = session.getUser().getUserId();
@@ -96,20 +98,30 @@ public class OrderManagementController {
                 res = ocr.saveOrder(order);
                 listOfOrders.add(order);
                 orderID++;
+                
             }
-        }else {
+
+           
+            block = new BlockForOrderManagement(blockid,blockName,listOfOrders);
+            
+            BlockCreationRepo bcr = new BlockCreationRepo();
+            res = bcr.updateBlockOrder(block);
+            res = bcr.updateBlockDetails(block);
+            
+        } else {
         	
             orderid= Integer.toString(rand.nextInt()).substring(0, 3);
 
             order = new Order(orderid, ticker, side, type, totalQuantity, compName, 
                     manager, portfolioID, 0, limitPrice, timeCreated, limitPrice, stopPrice);
             res = ocr.saveOrder(order);
-            listOfOrders.add(order);
-            orderID++;
+            
+            System.out.println("result from create " + res);
+            
+          
         }
         
-        block = new BlockForOrderManagement(blockid,blockName,listOfOrders);
-        blockID++;
+      
         
         
 ////        OrderValidator validator = new OrderValidator();
@@ -121,11 +133,8 @@ public class OrderManagementController {
         
         
         
-        BlockCreationRepo bcr = new BlockCreationRepo();
-        res = bcr.updateBlockOrder(block);
-        res = bcr.updateBlockDetails(block);
         
-        return "redirect:/mvc/portfolio";
+        return "redirect:/mvc/Homepage";
     }
     
     
