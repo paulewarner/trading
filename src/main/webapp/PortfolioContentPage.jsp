@@ -109,7 +109,7 @@
                     <p>NASDAQ:<%=portfolioContent.getSymbol() %></p>
                     <p>Quantity Held: <%=portfolioContent.getQuantity() %></p>
                     <p>Total Equity: $<%=portfolioContent.getValue() %></p>
-                    <p>Status:<%=portfolioContent.getStatus() %></p>
+                    <p>Status:<%= portfolioContent.getStatus() == 1 ? "Open" : "Closed" %></p>
               </div>
               <div class="buyORsellContainer">
                     <a href="/trading/mvc/createOrder" class="button">Buy/Sell</a>
@@ -122,11 +122,7 @@
                     <div class="popWindowContainerElement">Created By: Sam Smith</div>
                     <div class="popWindowContainerElement">Broker Name: Mit Kurale</div>
                     <div class="popWindowContainerElement statusContainer"> 
-                        <div>Status:</div>
-                        <div>
-                            <div class="completed">65000: Completed</div>
-                            <div class="pending">35000: Pending</div>
-                        </div>
+                    <div>Status: <%= portfolioContent.getStatus() == 1 ? "Open" : "Closed" %></div>
                     </div>
 
               </div>
@@ -147,9 +143,9 @@
                        <p>Total Equity:$<%=portfolioContent.getValue() %></p>
                  </div>
                  <div class="buyORsellContainer">
-                 
+                 	<%Integer userType=  Integer.parseInt((String)request.getAttribute("portfolioType")); %>
                      <form action="forwardOrder" method="POST">
-                         <button class="button" type="submit" name="order" value=" <%=portfolioContent.getOrderID() %> ">Forward Order</button>
+                         <button class="button"  style="<%if(userType == 0){ %>display: none;<%} %>" type="submit" name="order" value=" <%=portfolioContent.getOrderID() %> ">Forward Order</button>
                      </form>
                        <!-- <a href="#" class="button">Forward Order</a> -->
                   </div>

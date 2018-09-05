@@ -52,7 +52,7 @@ public class EMSService {
 				
 			}
 			
-			else if(total > 10000 ){
+			else {
 				
 				int remainder = total % 500;
 				int divisions = (total - remainder) / 500;

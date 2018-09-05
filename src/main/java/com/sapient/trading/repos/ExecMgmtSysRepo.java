@@ -34,17 +34,16 @@ public boolean orderUpdate(Order newOrder) {
 	boolean res = false;
 	Connection conn = null;
 	
+	System.out.println("We're here!");
+	
 	try {
 		// STEP 2: Register JDBC driver
 		Class.forName(JDBC_DRIVER);
 
 		// STEP 3: Open a connection
-		System.out.println("Connecting to a selected database...");
 		conn = DriverManager.getConnection(DB_URL, USER, PASS);
-		System.out.println("Connected database successfully...");
 
 		// STEP 4: Execute a query
-		System.out.println("Creating statement...");
 		java.sql.PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(" UPDATE `equity`.`order` SET `Open_Quantity`= ? , `Allocated_Quantity`= ? , `Status`= ? , `Time_Executed`=? WHERE `OrderID`=? ;");
 		
 //		Setting open quantity
@@ -66,8 +65,6 @@ public boolean orderUpdate(Order newOrder) {
 		stmt.setString(5, newOrder.getOrderId());
 		
 		stmt.executeUpdate();
-			
-		System.out.println("Connection closed...");
 		res = true;
 
 	} 
@@ -123,13 +120,9 @@ public boolean orderUpdate(Order newOrder) {
 					String status = rs.getString("Status");
 					float actualPrice = rs.getFloat("Actual_Price");
 					Date timeCreated = rs.getDate("Time_Created");
-					Date timeExecuted = rs.getDate("Time_executed");
 					
 					res = new Order(orderId, symbol, side, type, totalQuantity, stockName, manager, porfolioId,
 							allocatedQuantity, actualPrice, timeCreated, limitPrice, stopPrice);
-					if(timeExecuted != null) {
-						res.setTimeExecuted(timeExecuted);
-					}
 					res.setOpenQuantity(openQuantity);
 					res.setAllocatedQuantity(allocatedQuantity);
 					if(status.equals("1")) {

@@ -43,6 +43,8 @@ public class ExecutionManagementController {
 //		Forwarding order
 		li = ems.forwardOrder(tmp);
 		
+		System.out.println("The size of the list is " + li.size());
+		
 //		Updating database
 		for(Order o : li) {
 			result = EMSRepo.orderUpdate(o);
